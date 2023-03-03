@@ -20,107 +20,150 @@
 * OR OTHER DEALINGS IN THE SOFTWARE.
 *
 ***************************************************************************/
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-Pane {
-    id: root
+import QtQuick 2.12
+import QtQuick.Controls 2.12
+
+FocusScope{
+    id:root
 
     property color panelColour: "#ff000000"
     property color panelHeaderColour: "#ffffffff"
     property color panelNavColour: "#ffffffff"
     property string panelHeaderText: "Default header"
     property int panelHeaderPointsize: 24
-    //    property real navBright : 0.5
-    //    property real navDim : 0.1
     property string panelFont: "Tahoma"
-    //property alias focusHere:panelList.focus
-    //property alias panelModel:panelList.model
-    //property ListModel modelItem
-    //property alias panelDelegate:panelList.delegate
-    //property Component modelDelegate
-    //    signal selectLeft()
-    //    signal selectRight()
-    // width: 500
-    // height: 500
-focus: true
-    focusPolicy: Qt.StrongFocus
-    anchors.verticalCenter: parent.verticalCenter
-  background: Rectangle{color:"#00000000"}
-      contentItem:  Row{
-        id:panel
-        GlowButton{
-            id:navLeft
-            height: parent.height*.5
-            width:parent.width*0.05
-            activeFocusOnTab: true
-            onSelectNav:{console.log("clicked navLeft")}
-            onHoverNav:{console.log("mouse in navLeft");forceActiveFocus()}
-            onUnHoverNav:{console.log("mouse left navLeft")}
-                    }
-        Rectangle{
-            id:content
-            height: parent.height
-            color: panelColour
-            width:parent.width*0.8
-            clip:true
+    property ListModel modelItem
+    property Component modelDelegate
+    property string listViewOrientation
+    property alias showList: contentLoader.active
+    signal goLeft()
+    signal goRight()
+    implicitWidth: 900
+    implicitHeight: 500
+    clip: true
+    Rectangle{
+        id: panel
+        color: "#00808080"
+        anchors.fill:parent
 
-            Column{
-                Text{
-                    id:panelHeader
-                    width: content.width
-                    wrapMode: Text.WordWrap
-                    //  x:parent.width*0.2
-                    text:panelHeaderText
-                    color: panelHeaderColour
-                    font.pointSize: panelHeaderPointsize
-                    font.family: panelFont
-                    elide:Text.ElideRight
-                    MouseArea{
-                        anchors.fill: parent
-                        acceptedButtons: Qt.LeftButton
-                        onClicked: {console.log("clicked header")
-                            //         panelList.visible=true
-                        }
-                    }
-                }
-                /*
-            ListView{
-                id:panelList
-                width:content.width
-                height:  content.height
+        Row {
+            id: row
+            anchors.fill:parent
+
+            GlowButton {
+                id:navLeft
+                width: panel.width*0.1
+                height: panel.height*0.5
+                y:panel.height*0.25
+                buttonColour: panelNavColour
+                activeFocusOnTab: contentLoader.active
+                KeyNavigation.right:content
+                onSelectNav:{/*console.log("clicked navLeft");*/goLeft();}
+          //      onHoverNav:{console.log("mouse in navLeft");}
+         //       onUnHoverNav:{console.log("mouse left navLeft");}
+            }
+
+            Rectangle {
+                id:content
+                width: panel.width*0.8
+                height: panel.height
+                color: panelColour
                 clip:true
-                focus: true
-                snapMode: ListView.SnapOneItem
-                keyNavigationEnabled: true
-                keyNavigationWraps: true
-                activeFocusOnTab: false
-                onCurrentIndexChanged: {console.log("index changed to:",currentIndex)
-                    //panelList.visible=(panelList.visible === true) ? false : true
-                }
-                onActiveFocusChanged: {
-                    console.log("panelList active focus is:",activeFocus)
-                }
-                onFocusChanged: { console.log("panelList focus is:",focus)
-                }
-                highlightFollowsCurrentItem: true
-                highlight: Rectangle {
-                    anchors{left:parent.left;right :parent.right}
+                activeFocusOnTab: contentLoader.active
+                Column{
+                    Text{
+                        id:panelHeader
+                        width: content.width
+                        wrapMode: Text.WordWrap
+                        text:panelHeaderText
+                        color: panelHeaderColour
+                        font.pointSize: panelHeaderPointsize
+                        font.family: panelFont
+                        elide:Text.ElideRight
+                    }
+                    Rectangle{
+                        width: content.width
+                        height: content.height-panelHeader.height
+                        color: panelColour
+                        Loader{
+                            id:contentLoader
+                            anchors.fill:parent
+                            source: "Selector.qml"
+                            activeFocusOnTab: true
+                            focus: true
+                            onLoaded:{
+                                item.model=root.modelItem;
+                                item.delegate=root.modelDelegate;
+                                item.flow=root.listViewOrientation
+//                                modelBinding.target=contentLoader.item;
+//                                delegateBinding.target=contentLoader.item;
+//                                forceActiveFocus();
+                            }
+                            onStateChanged: {panelHeader.text=status}
+                            /*
 
-                    //anchors.fill:parent
-                    color: "#ff0000ff";  }
+
+
+*/
+                            MouseArea{
+                                anchors.fill: parent
+                                enabled: true
+                                hoverEnabled:true
+                                // acceptedButtons: Qt.LeftButton
+//                                onClicked: {console.log("contentLoader Clicked");}
+                                onEntered: {contentLoader.forceActiveFocus();/*console.log("contentLoader entered");*/}
+//                                onExited: {console.log("contentLoader exited");}
+                            }
+                        }
+                        Binding{
+                            id:modelBinding
+                            property: "model";
+                            value:root.modelItem;
+
+                        }  Binding{
+                            id:delegateBinding
+                            property: "delegate";
+                            value:root.modelDelegatel;
+
+                        }
+
+                        Connections {
+                            target: contentLoader.valid? contentLoader.item : null}
+
+                    }
+
+                }
+            /*    onActiveFocusChanged: {
+                    console.log("content active focus is:",activeFocus);
+                    //                    if(activeFocus ===true)
+                    //                    {
+                    //                        glowButton.state="hasFocus";
+                    //                    }
+                    //                    else{
+                    //                        glowButton.state="";
+                    //                    }
+                }*/
+
             }
-      */
+
+            GlowButton {
+                id:navRight
+                width: panel.width*0.1
+                height: panel.height*0.5
+                y:panel.height*0.25
+                buttonColour: panelNavColour
+                activeFocusOnTab: contentLoader.active
+                KeyNavigation.left:content
+                onSelectNav:{/*console.log("clicked navRight");*/goRight();}
+//                onHoverNav:{console.log("mouse in navRight");}
+//                onUnHoverNav:{console.log("mouse left navRight");}
             }
         }
-        GlowButton{
-            id:navRight
-            height: parent.height*.5
-            width:parent.width*0.05
-            activeFocusOnTab: true
-            onSelectNav:{ console.log("clicked navRight")}
-            onHoverNav:{console.log("mouse in navRight");forceActiveFocus()}
-            onUnHoverNav:{console.log("mouse left navRight")}
 
-        }
     }
 }
+
+
+
+
+
