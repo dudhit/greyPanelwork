@@ -8,12 +8,13 @@ Rectangle{
     ColumnLayout{
         clip:true
         anchors.fill:parent
+        spacing: 20
         /*should use a Repeater but meh*/
         GlowButton{  id:powerOff
             visible: sddm.canPowerOff
             Layout.fillWidth: true
             Layout.fillHeight:  true
-            buttonColour: secondGradient
+            buttonColour: firstGradient
                      KeyNavigation.down: reboot
             onSelectNav: {sddm.powerOff();}
             Text{
@@ -34,7 +35,7 @@ Rectangle{
             visible: sddm.canReboot
             Layout.fillWidth: true
             Layout.fillHeight: true
-            buttonColour: secondGradient
+            buttonColour: firstGradient
             KeyNavigation.down: suspend
             onSelectNav: {sddm.reboot();}
             Text{
@@ -43,7 +44,7 @@ Rectangle{
                 wrapMode: Text.WordWrap
                 minimumPointSize: 70
                 minimumPixelSize: 56
-                text: "reboot"
+                text: "Reboot"
                 font.pointSize:40
                 horizontalAlignment : Text.AlignHCenter
                 verticalAlignment : Text.AlignVCenter
@@ -54,7 +55,7 @@ Rectangle{
             visible: sddm.canSuspend
             Layout.fillWidth: true
             Layout.fillHeight:  true
-            buttonColour: secondGradient
+            buttonColour: firstGradient
             KeyNavigation.down: hibernate
             onSelectNav: {sddm.suspend();}
             Text{
@@ -63,7 +64,7 @@ Rectangle{
                 wrapMode: Text.WordWrap
                 minimumPointSize: 70
                 minimumPixelSize: 56
-                text: "suspend"
+                text: "Suspend"
                 font.pointSize:40
                 horizontalAlignment : Text.AlignHCenter
                 verticalAlignment : Text.AlignVCenter
@@ -74,7 +75,7 @@ Rectangle{
             visible: sddm.canHibernate
             Layout.fillWidth: true
             Layout.fillHeight:  true
-            buttonColour: secondGradient
+            buttonColour: firstGradient
             KeyNavigation.down: hybridSleep
             onSelectNav: {sddm.hibernate();}
             Text{
@@ -83,7 +84,7 @@ Rectangle{
                 wrapMode: Text.WordWrap
                 minimumPointSize: 70
                 minimumPixelSize: 56
-                text: "hibernate"
+                text: "Hibernate"
                 font.pointSize:40
                 horizontalAlignment : Text.AlignHCenter
                 verticalAlignment : Text.AlignVCenter
@@ -94,7 +95,7 @@ Rectangle{
             visible: sddm.canHybridSleep
             Layout.fillWidth: true
             Layout.fillHeight:  true
-            buttonColour: secondGradient
+            buttonColour: firstGradient
             KeyNavigation.down: powerOff
             onSelectNav: {sddm.hybridSleep();}
             Text{
@@ -103,7 +104,7 @@ Rectangle{
                 wrapMode: Text.WordWrap
                 minimumPointSize: 70
                 minimumPixelSize: 56
-                text: "hybrid Sleep"
+                text: "Hybrid Sleep"
                 font.pointSize:40
                 horizontalAlignment : Text.AlignHCenter
                 verticalAlignment : Text.AlignVCenter

@@ -22,6 +22,7 @@
 ***************************************************************************/
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.12
 import Qt.labs.settings 1.0
 
 /* greeter only */
@@ -248,9 +249,9 @@ Item{
             states:[
                 State {
                     name:""
-                    PropertyChanges {target:userSelect;opacity:0 ;height:0 ;width:0 ; /*modelItem:undefined;  modelDelegate:undefined;*/showList:false;}
-                    PropertyChanges {target:powerSelect ;opacity:0 ;height:0 ;width:0  ; /*modelItem:undefined;  modelDelegate:undefined;*/showList:false;}
-                    PropertyChanges {target:desktopSelect;opacity:0 ; height:0; width:0 ; /*modelItem:undefined;  modelDelegate:undefined;*/showList:false;}
+                    PropertyChanges {target:userSelect;opacity:0 ;height:0 ;width:0 ; showList:false;}
+                    PropertyChanges {target:powerSelect ;opacity:0 ;height:0 ;width:0  ; showList:false;}
+                    PropertyChanges {target:desktopSelect;opacity:0 ; height:0; width:0 ; showList:false;}
                 },
                 State {
                     name:"showUsers"

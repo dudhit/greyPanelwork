@@ -25,23 +25,22 @@ import QtQuick.Controls 2.12
 
 Item{
     id:root
-    property alias model: panelList.model
-    property alias delegate: panelList.delegate
-    property alias flow: panelList.orientation
+    property alias model: listContainer.model
+    property alias delegate: listContainer.delegate
+    property alias flow: listContainer.orientation
    // width: 50
 //height: 50
     anchors.fill:parent
 
     ListView{
-        id:panelList
-        width:root.width
-        height:  root.height
+        id:listContainer
+        anchors.fill:parent
         clip:true
         focus: true
         snapMode: ListView.SnapOneItem
         keyNavigationEnabled: true
         keyNavigationWraps: true        
-        currentIndex: (model.lastIndex)?model.lastIndex:0
+//        currentIndex: (model.lastIndex)?model.lastIndex:0
 //        activeFocusOnTab: false
         onCurrentIndexChanged: {console.log("index changed to:",currentIndex);
         }

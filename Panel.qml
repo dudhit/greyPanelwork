@@ -35,7 +35,7 @@ FocusScope{
     property ListModel modelItem
     property Component modelDelegate
     property string listViewOrientation
-    property alias showList: contentLoader.active
+//    property alias showList: contentLoader.active
     signal goLeft()
     signal goRight()
     implicitWidth: 900
@@ -68,7 +68,7 @@ FocusScope{
                 width: panel.width*0.8
                 height: panel.height
                 color: panelColour
-                clip:true
+//                clip:true
                 activeFocusOnTab: contentLoader.active
                 Column{
                     Text{
@@ -85,36 +85,41 @@ FocusScope{
                         width: content.width
                         height: content.height-panelHeader.height
                         color: panelColour
-                        Loader{
-                            id:contentLoader
-                            anchors.fill:parent
-                            source: "Selector.qml"
-                            activeFocusOnTab: true
-                            focus: true
-                            onLoaded:{
-                                item.model=root.modelItem;
-                                item.delegate=root.modelDelegate;
-                                item.flow=root.listViewOrientation
-//                                modelBinding.target=contentLoader.item;
-//                                delegateBinding.target=contentLoader.item;
-//                                forceActiveFocus();
-                            }
-                            onStateChanged: {panelHeader.text=status}
-                            /*
-
-
-
-*/
-                            MouseArea{
-                                anchors.fill: parent
-                                enabled: true
-                                hoverEnabled:true
-                                // acceptedButtons: Qt.LeftButton
-//                                onClicked: {console.log("contentLoader Clicked");}
-                                onEntered: {contentLoader.forceActiveFocus();/*console.log("contentLoader entered");*/}
-//                                onExited: {console.log("contentLoader exited");}
-                            }
+                        Selector{
+                              model: root.modelItem;
+                              delegate: root.modelDelegate;
+                              flow: root.listViewOrientation
                         }
+//                        Loader{
+//                            id:contentLoader
+//                            anchors.fill:parent
+//                            source: "Selector.qml"
+//                            activeFocusOnTab: true
+//                            focus: true
+////                            onLoaded:{
+////                                item.model=
+////                                item.delegate=
+//////                                item.flow=
+//////                                modelBinding.target=contentLoader.item;
+//////                                delegateBinding.target=contentLoader.item;
+//////                                forceActiveFocus();
+////                            }
+//                            onStateChanged: {panelHeader.text=status}
+//                            /*
+
+
+
+//*/
+////                            MouseArea{
+////                                anchors.fill: parent
+////                                enabled: true
+////                                hoverEnabled:true
+////                                // acceptedButtons: Qt.LeftButton
+//////                                onClicked: {console.log("contentLoader Clicked");}
+////                                onEntered: {contentLoader.forceActiveFocus();/*console.log("contentLoader entered");*/}
+//////                                onExited: {console.log("contentLoader exited");}
+////                            }
+//                        }
                         Binding{
                             id:modelBinding
                             property: "model";
@@ -133,16 +138,7 @@ FocusScope{
                     }
 
                 }
-            /*    onActiveFocusChanged: {
-                    console.log("content active focus is:",activeFocus);
-                    //                    if(activeFocus ===true)
-                    //                    {
-                    //                        glowButton.state="hasFocus";
-                    //                    }
-                    //                    else{
-                    //                        glowButton.state="";
-                    //                    }
-                }*/
+
 
             }
 
@@ -158,12 +154,12 @@ FocusScope{
 //                onHoverNav:{console.log("mouse in navRight");}
 //                onUnHoverNav:{console.log("mouse left navRight");}
             }
-        }
+
 
     }
 }
 
-
+}
 
 
 
