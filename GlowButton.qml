@@ -22,43 +22,64 @@
 ***************************************************************************/
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-Pane {
+FocusScope {
     id: root
     property real navBright : 0.5
     property real navDim : 0.1
-
-    y:height*.5
+    property alias buttonColour:glowButton.color
     signal selectNav()
     signal hoverNav()
     signal unHoverNav()
+    clip:true
+    implicitWidth:100
+    implicitHeight:100
 
-    focusPolicy: Qt.StrongFocus
-    //anchors.fill: parent
-    background:Rectangle{
-        id:navbutton
-
-        color:panelNavColour
-        radius: width
+    Rectangle{
+        id:glowButton
+        anchors.fill: parent;
+        anchors.margins: 5;
+        color:"#ff008000"
+        radius: width*0.5
         focus: true
         onActiveFocusChanged: {
-            console.log("navbutton active focus is:",activeFocus)
+            if(activeFocus ===true)
+            {
+                glowButton.state="hasFocus";anime.stop()
+            }
+            else{
+                glowButton.state="";anime.start()
+            }
         }
-        onFocusChanged: {      console.log("navbutton focus is:",focus)
-        }
+
+        states:  [
+            State {
+                name: ""
+                PropertyChanges {
+                    target: glowButton;
+                    opacity:  navDim ;
+                    anchors.margins: 5;
+                }
+            },
+            State {
+                name: "hasFocus"
+                PropertyChanges {
+                    target: glowButton;
+                    opacity:  navBright ;
+                    anchors.margins: 0;
+                }
+            }
+        ]
+
+
         MouseArea{
             anchors.fill: parent
             enabled: true
             hoverEnabled:true
-           // acceptedButtons: Qt.LeftButton
-            onClicked: {console.log("navbutton Clicked")
-                root.selectNav()
-            }
-            onEntered: {anime.stop();navbutton.opacity=navBright;root.hoverNav()
-            }
-            onExited: {anime.start();root.unHoverNav()
-            }
+            onClicked: {root.selectNav();}
+            onEntered: {anime.stop();glowButton.state="hasFocus";root.hoverNav();glowButton.forceActiveFocus();}
+            onExited: {anime.start();glowButton.state="";root.unHoverNav();}
         }
-        Keys.onPressed: (event)=> {  if (event.key === Qt.Key_Space);  root.selectNav(); event.accepted = true}
+        Keys.onPressed: (event)=> {  if (event.key === Qt.Key_Space){  root.selectNav(); event.accepted = true;}}
 
         SequentialAnimation {
             id:anime
@@ -67,7 +88,7 @@ Pane {
 
             NumberAnimation{
                 id: faderOut
-                target: navbutton
+                target: glowButton
                 properties: "opacity"
                 from:  navBright
                 to:navDim
@@ -76,7 +97,7 @@ Pane {
 
             NumberAnimation{
                 id: faderIn
-                target: navbutton
+                target: glowButton
                 properties: "opacity"
                 from:  navDim
                 to:navBright
@@ -89,3 +110,5 @@ Pane {
     }
 
 }
+
+

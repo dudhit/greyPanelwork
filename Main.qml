@@ -88,6 +88,7 @@ Item{
    greeter only */
     property int sessionIndex//: session.index
     property color backGroundColour: "#ff000000"
+    property color backGroundTranspColour:"#00000000"
     property color firstGradient: "#ff404040"
     property color secondGradient: "#ffc0c0c0"
     property color finalGradient: "#ffffffff"
@@ -142,8 +143,10 @@ Item{
                 anchors.fill: parent
                 cursorShape: Qt.CrossCursor
                 onClicked: {
-                    console.log("clicked background")
-                    options.focus=true ;options.state="showUsers"
+                    if (options.state === "")
+                        options.state="showUsers"
+                    else
+                        options.state=""
                 }
             }
 
@@ -283,104 +286,34 @@ Item{
             /* state change order showUsers>showPower>showSession */
             states:  [
                 State {
-                    name: ""
-                    PropertyChanges {
-                        target: userSelect;
-                        opacity:  0 ;
-                        height:0;
-                        width:0;
-                    }
-                    PropertyChanges {
-                        target: powerSelect;
-                        opacity: 0 ;
-                        height:0;
-                        width:0 ;
-                    }
-                    PropertyChanges {
-                        target: desktopSelect;
-                        opacity: 0 ;
-                        height:0;
-                        width:0 ;
-                    }
+                    name:""
+                    PropertyChanges {target:userSelect;opacity:0 ;height:0 ;width:0 ; temporaryUntilContentInserted:false;}
+                    PropertyChanges {target:powerSelect ;opacity:0 ;height:0 ;width:0  ; temporaryUntilContentInserted:false;}
+                    PropertyChanges {target:desktopSelect;opacity:0 ; height:0; width:0 ; temporaryUntilContentInserted:false;}
                 },
                 State {
-                    name: "showUsers"
-                    PropertyChanges {
-                        target: userSelect;
-                        opacity:  1 ;
-                        height:windowHeight*0.65;
-                        width:windowWidth*0.5 ;
-                        x:parent.width*0.5-(width*.5);
-                    }
-                    PropertyChanges {
-                        target: powerSelect;
-                        opacity: 0;
-                        height:0;
-                        width:0 ;
-                        x:parent.width;
-                        panelHeaderPointsize:1;
-                    }
-                    PropertyChanges {
-                        target: desktopSelect;
-                        opacity: 0 ;
-                        height:0;
-                        width:0;
-                        x:0;
-                        panelHeaderPointsize:1;
-                    }
+                    name:"showUsers"
+                    PropertyChanges { target:userSelect; opacity:1 ; height:windowHeight*0.65; width:windowWidth*0.5 ; x:parent.width*0.5-(width*.5);temporaryUntilContentInserted:true; }
+                    PropertyChanges { target:powerSelect; opacity:0; height:0; width:0 ; x:windowWidth; panelHeaderPointsize:1;temporaryUntilContentInserted:false;}
+                    PropertyChanges { target:desktopSelect; opacity:0 ; height:0; width:0; x:0; panelHeaderPointsize:1; temporaryUntilContentInserted:false;}
+
                 },
 
                 State {
-                    name: "showPower"
-                    PropertyChanges {
-                        target: userSelect
-                        opacity:  0
-                        height:0
-                        width:0
-                        x:0
-                        panelHeaderPointsize:1
-                    }
-                    PropertyChanges {
-                        target: powerSelect
-                        opacity: 1
-                        height:windowHeight*0.65
-                        width:windowWidth*0.5
-                        x:parent.width*0.5-(width*.5)
-                    }
-                    PropertyChanges {
-                        target: desktopSelect
-                        opacity: 0
-                        height:0
-                        width:0;   x:parent.width
-                        panelHeaderPointsize:1
-                    }
+                    name:"showPower"
+                    PropertyChanges { target:userSelect ; opacity:0 ; height:0 ; width:0 ; x:0 ; panelHeaderPointsize:1;temporaryUntilContentInserted:false;}
+                    PropertyChanges { target:powerSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:windowWidth*0.5-(width*.5);temporaryUntilContentInserted:true;  }
+                    PropertyChanges { target:desktopSelect; opacity:0; height:0; width:0; x:windowWidth; panelHeaderPointsize:1; temporaryUntilContentInserted:false;}
                 },
 
                 State {
-                    name: "showSession"
-                    PropertyChanges {
-                        target: userSelect; opacity:  0
-                        height:0
-                        width:0
-                        x:parent.width
-                        panelHeaderPointsize:1
-                    }
-                    PropertyChanges {
-                        target: powerSelect
-                        opacity: 0
-                        height:0
-                        width:0
-                        x:0
-                        panelHeaderPointsize:1
-                    }
-                    PropertyChanges {
-                        target: desktopSelect
-                        opacity: 1
-                        height:windowHeight*0.65
-                        width:windowWidth*0.5
-                        x:parent.width*0.5-(width*.5)
-                    }
+                    name:"showSession"
+                    PropertyChanges { target:userSelect; opacity:0; height:0; width:0; x:windowWidth ;panelHeaderPointsize:1;temporaryUntilContentInserted:false;}
+                    PropertyChanges { target:powerSelect; opacity:0; height:0; width:0; x:0; panelHeaderPointsize:1;temporaryUntilContentInserted:false;}
+                    PropertyChanges { target:desktopSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:parent.width*0.5-(width*.5);temporaryUntilContentInserted:true; }
                 }
+
+
             ]
             transitions: Transition {
                 NumberAnimation {  properties: "opacity,height,x,width,panelHeaderPointsize"; duration: 1100; easing.type: Easing.OutInQuart }
@@ -388,77 +321,57 @@ Item{
 
             Panel{
                 id:userSelect
-                panelColour: firstGradient
+                panelColour:backGroundTranspColour
                 panelNavColour:finalGradient
-                panelHeaderColour: "#ff0000ff"
-                panelHeaderText: "user Select"
-                panelHeaderPointsize: 24
-                focus: true
-                height: windowHeight*0.65
-                width: windowWidth*0.5
+                panelHeaderColour:panelHeaderColour
+                panelHeaderText:"user Select"
+                panelHeaderPointsize:24
+                height:main.windowHeight*0.65
+                width:main.windowWidth*0.5
                 x:windowWidth*0.5-(width*.5)
-             //   onSelectLeft: options.state = "showSession"
-             //   onSelectRight:options.state = "showPower"
-                //modelItem: iHadNoChoice
-                //modelDelagate:
-                onActiveFocusChanged: {
-                    console.log("userSelect active focus is:",activeFocus)
-                }
-                onFocusChanged: {      console.log("userSelect focus is:",focus)
-                }
+                anchors.verticalCenter:parent.verticalCenter
+                onGoLeft:options.state = "showSession"
+                onGoRight:options.state = "showPower"
+                //                modelItem:mockUserModel
+                //                modelDelegate:UserView{}
+                //                listViewOrientation:  ListView.Horizontal
             }
             Panel{
                 id:desktopSelect
-                panelColour: firstGradient
+                panelColour:backGroundTranspColour
                 panelNavColour:finalGradient
-                panelHeaderColour: "#ff0000ff"
+                panelHeaderColour:panelHeaderColour
                 panelHeaderText: "desktop Select"
-                panelHeaderPointsize: 24
-                focus: true
-                height: windowHeight*0.65
-                width: windowWidth*0.5
+                panelHeaderPointsize:24
+                height:main.windowHeight*0.65
+                width:main.windowWidth*0.5
                 x:windowWidth*0.5-(width*.5)
-         //       onSelectLeft: options.state = "showPower"
-         //       onSelectRight:options.state = "showUsers"
-                //onSelected:{}
-                // panelModel:mockSessionModel
-                //                panelModel:sessionModel
-                //  panelDelegate:SessionView{}
-                //                onFocusChanged: {                        }
-                onActiveFocusChanged: {
-                    console.log("desktopSelect active focus is:",activeFocus)
-                }
-                onFocusChanged: {    console.log("desktopSelect focus is:",focus)
-                }
+                anchors.verticalCenter:parent.verticalCenter
+                onGoLeft:options.state = "powerSelect"
+                onGoRight:options.state = "userSelect"
+
             }
             Panel{
                 id:powerSelect
-                panelColour: firstGradient
+                panelColour:backGroundTranspColour
                 panelNavColour:finalGradient
-                panelHeaderColour: "#ff0000ff"
+                panelHeaderColour:panelHeaderColour
                 panelHeaderText: "power Select"//replace with sddm.hostname
-                panelHeaderPointsize: 30
-                focus: true
-                height: windowHeight*0.65
-                width: windowWidth*0.5
+                panelHeaderPointsize:24
+                height:main.windowHeight*0.65
+                width:main.windowWidth*0.5
                 x:windowWidth*0.5-(width*.5)
-          //      onSelectLeft: options.state = "showUsers"
-        //        onSelectRight:options.state = "showSession"
-                //   panelModel: powerModel
-                //   panelDelegate:PowerView{}
-                onActiveFocusChanged: {
-                    console.log("powerSelect active focus is:",activeFocus)
-                }
-                onFocusChanged: {
-                    console.log("powerSelect focus is:",focus)
-                }
+                anchors.verticalCenter:parent.verticalCenter
+                onGoLeft:options.state = "userSelect"
+                onGoRight:options.state = "desktopSelect"
+
             }
 
-//            MouseArea{
-//                anchors.fill: parent
-//                enabled: true
-//                onHoveredChanged: {console.log("mouse in options")    }
-//            }
+            //            MouseArea{
+            //                anchors.fill: parent
+            //                enabled: true
+            //                onHoveredChanged: {console.log("mouse in options")    }
+            //            }
         }
 
 
