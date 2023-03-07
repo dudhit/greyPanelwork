@@ -279,7 +279,7 @@ Item{
                 panelColour:backGroundTranspColour
                 panelNavColour:finalGradient
                 panelHeaderColour:panelHeaderColour
-                panelHeaderText:"user Select"
+                panelHeaderText:sddm.hostname+": User Login"
                 panelHeaderPointsize:24
                 height:main.windowHeight*0.65
                 width:main.windowWidth*0.5
@@ -297,7 +297,7 @@ Item{
                 panelColour:backGroundTranspColour
                 panelNavColour:finalGradient
                 panelHeaderColour:panelHeaderColour
-                panelHeaderText: "desktop Select"
+                panelHeaderText:sddm.hostname+ ": Desktop Selection"
                 panelHeaderPointsize:24
                 height:main.windowHeight*0.65
                 width:main.windowWidth*0.5
@@ -306,12 +306,12 @@ Item{
                 onGoLeft:options.state = "showPower"
                 onGoRight:options.state = "showUsers"
             }
-            StaticPanel{
+            Panel{
                 id:powerSelect
                 panelColour:backGroundTranspColour
                 panelNavColour:finalGradient
                 panelHeaderColour:panelHeaderColour
-                panelHeaderText: "power Select"//replace with sddm.hostname
+                panelHeaderText: sddm.hostname
                 panelHeaderPointsize:24
                 height:main.windowHeight*0.65
                 width:main.windowWidth*0.5
