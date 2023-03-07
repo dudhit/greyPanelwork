@@ -22,7 +22,6 @@
 ***************************************************************************/
 import QtQuick 2.12
 import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.12
 
 FocusScope{
     id:root
@@ -33,11 +32,11 @@ FocusScope{
     property string panelHeaderText: "Default header"
     property int panelHeaderPointsize: 24
     property string panelFont: "Tahoma"
-    property bool temporaryUntilContentInserted
 //    property ListModel modelItem
 //    property Component modelDelegate
 //    property string listViewOrientation
-//    property alias showList: contentLoader.active
+    property alias showList: contentLoader.active
+    property alias setSource: contentLoader.source
     signal goLeft()
     signal goRight()
     implicitWidth: 900
@@ -45,39 +44,34 @@ FocusScope{
     clip: true
     Rectangle{
         id: panel
-        color: panelColour
+        color: "#00808080"
         anchors.fill:parent
 
-        Row{
+        Row {
             id: row
             anchors.fill:parent
-            spacing: 0
+
             GlowButton {
                 id:navLeft
-                width: panel.width*0.05
+                width: panel.width*0.1
                 height: panel.height*0.5
                 y:panel.height*0.25
                 buttonColour: panelNavColour
-                activeFocusOnTab: temporaryUntilContentInserted
+                activeFocusOnTab: contentLoader.active
                 KeyNavigation.right:content
-                onSelectNav:{goLeft();}
+                onSelectNav:{/*console.log("clicked navLeft");*/goLeft();}
+             //   onHoverNav:{console.log("mouse in navLeft");}
+             //   onUnHoverNav:{console.log("mouse left navLeft");}
             }
 
             Rectangle {
                 id:content
-                width: panel.width*0.9
+                width: panel.width*0.8
                 height: panel.height
                 color: panelColour
-                onActiveFocusChanged:
-                {
-                    if (activeFocus===true)
-                        temporaryUntilContentInserted=true;
-                    else
-                        temporaryUntilContentInserted=false;
-                }
-                activeFocusOnTab: temporaryUntilContentInserted
+                clip:true
+                activeFocusOnTab: contentLoader.active
                 Column{
-                    spacing: 0
                     Text{
                         id:panelHeader
                         width: content.width
@@ -92,24 +86,63 @@ FocusScope{
                         width: content.width
                         height: content.height-panelHeader.height
                         color: panelColour
+                        Loader{
+                            id:contentLoader
+                            anchors.fill:parent
+                            activeFocusOnTab: true
+                            focus: true
+                            onLoaded:{
+//                                item.model=root.modelItem;
+//                                item.delegate=root.modelDelegate;
+//                                item.flow=root.listViewOrientation
+//                                modelBinding.target=contentLoader.item;
+//                                delegateBinding.target=contentLoader.item;
+//                                forceActiveFocus();
+                            }
+                            onStateChanged: {panelHeader.text=status}
+                            /*
+
+
+
+*/
+                            MouseArea{
+                                anchors.fill: parent
+                                enabled: true
+                                hoverEnabled:true
+                                // acceptedButtons: Qt.LeftButton
+                                onClicked: {/*console.log("contentLoader Clicked");*/}
+                                onEntered: {contentLoader.forceActiveFocus();/*console.log("contentLoader entered");*/}
+                                onExited: {/*console.log("contentLoader exited");*/}
+                            }
+                        }
+
+
+
+
                     }
+
                 }
+
             }
 
             GlowButton {
                 id:navRight
-                width: panel.width*0.05
+                width: panel.width*0.1
                 height: panel.height*0.5
                 y:panel.height*0.25
                 buttonColour: panelNavColour
-                activeFocusOnTab: temporaryUntilContentInserted
+                activeFocusOnTab: contentLoader.active
                 KeyNavigation.left:content
-                onSelectNav:{goRight();}
+                onSelectNav:{/*console.log("clicked navRight");*/goRight();}
+              //  onHoverNav:{console.log("mouse in navRight");}
+              //  onUnHoverNav:{console.log("mouse left navRight");}
             }
         }
-    }
 
+    }
 }
+
+
 
 
 

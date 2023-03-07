@@ -3,17 +3,16 @@ Component{
     id:sessionViewDelegate
     Rectangle{
         readonly property ListView lv:ListView.view
-       // anchors.left:parent.left
-      //  anchors.right :parent.right
         color: "#80404040"
         clip:true
+//        focus: true
         implicitHeight:t1.implicitHeight+t2.implicitHeight
-        implicitWidth:t1.implicitWidth+t2.implicitWidth
+        implicitWidth:lv.Width
         onActiveFocusChanged: {
-        console.log("sessionViewDelegate active focus is:",activeFocus)
+        console.log("sessionViewDelegate active focus is:",activeFocus);
         }
         onFocusChanged: {
-                        console.log("sessionViewDelegate focus is:",focus)
+                        console.log("sessionViewDelegate focus is:",focus);
         }
         Text{
             id:t1
@@ -47,9 +46,9 @@ Component{
 
         MouseArea{
             anchors.fill:parent
-            onClicked: {lv.currentIndex=model.index
-                sessionIndex:lv.currentIndex
-                console.log("model index:",model.index)
+            onClicked: {lv.currentIndex=model.index;
+//                sessionIndex:lv.currentIndex;
+                console.log("model index:",model.index);
             }
         }
 

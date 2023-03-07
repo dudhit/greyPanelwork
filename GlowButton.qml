@@ -50,7 +50,6 @@ FocusScope {
                 glowButton.state="";anime.start()
             }
         }
-
         states:  [
             State {
                 name: ""
@@ -69,7 +68,6 @@ FocusScope {
                 }
             }
         ]
-
 
         MouseArea{
             anchors.fill: parent

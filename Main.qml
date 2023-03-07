@@ -1,5 +1,5 @@
 /***************************************************************************
-* Copyleft (c) 2023 Justan O'Strawman  <justanotherstrawman@gmail.com>
+* Copyleft (c) 2023 Justan O'Strawman <justanotherstrawman@gmail.com>
 * Permission is hereby granted, free of charge, to any person
 * obtaining a copy of this software and associated documentation
 * files (the "Software"), to deal in the Software without restriction,
@@ -21,7 +21,8 @@
 *
 ***************************************************************************/
 import QtQuick 2.15
-import QtQuick.Controls 2.12
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.12
 import Qt.labs.settings 1.0
 
 /* greeter only */
@@ -33,55 +34,55 @@ import "SddmComponents" as SddmComponents
 https://github.com/sddm/sddm/blob/develop/docs/THEMING.md
 Properties
 
-hostName: Holds the name of the host computer.
+hostName:Holds the name of the host computer.
 
-canPowerOff: true, if we can power off the machine; false, otherwise
+canPowerOff:true, if we can power off the machine; false, otherwise
 
-canReboot: true, if we can reboot the machine; false, otherwise
+canReboot:true, if we can reboot the machine; false, otherwise
 
-canSuspend: true, if the machine supports suspending to the memory; false, otherwise
+canSuspend:true, if the machine supports suspending to the memory; false, otherwise
 
-canHibernate: true, if the machine supports hibernating, e.g suspending to the disk; false, otherwise
+canHibernate:true, if the machine supports hibernating, e.g suspending to the disk; false, otherwise
 
-canHybridSleep: true, if the machine supports hybrid sleep, e.g suspending to both memory and disk; false, otherwise
+canHybridSleep:true, if the machine supports hybrid sleep, e.g suspending to both memory and disk; false, otherwise
 Methods
 
-powerOff(): Powers of the machine.
+powerOff():Powers of the machine.
 
-reboot(): Reboots the machine.
+reboot():Reboots the machine.
 
-suspend(): Suspends the machine to the memory.
+suspend():Suspends the machine to the memory.
 
-hibernate(): Suspends the machine to the disk.
+hibernate():Suspends the machine to the disk.
 
-hybridSleep(): Suspends the machine both to the memory and the disk.
+hybridSleep():Suspends the machine both to the memory and the disk.
 
-login(user, password, sessionIndex): Attempts to login as the user, using the password into the session pointed by the sessionIndex. Either the loginFailed or the loginSucceeded signal will be emitted depending on whether the operation is successful or not.
+login(user, password, sessionIndex):Attempts to login as the user, using the password into the session pointed by the sessionIndex. Either the loginFailed or the loginSucceeded signal will be emitted depending on whether the operation is successful or not.
 Signals
 
-loginFailed(): Emitted when a requested login operation fails.
+loginFailed():Emitted when a requested login operation fails.
 
-loginSucceeded(): Emitted when a requested login operation succeeds.
-screenModel: 
- provides: name , geometry ,primary
+loginSucceeded():Emitted when a requested login operation succeeds.
+screenModel:
+ provides:name , geometry ,primary
 
 sessionModel:
- provides: file, name, exec , comment , lastIndex
+ provides:file, name, exec , comment , lastIndex
 
 userModel:
  provides name, realName, homeDir , icon , lastIndex , lastUser
 
-*sddm locale  selection sessionModel modelItem.modelData.shortName
+*sddm locale selection sessionModel modelItem.modelData.shortName
 *sddm.login(model.name, password, sessionIndex);
 *error text __sddm_errors
 
 */
 Item{
     id:main
-    visible: true
+    visible:true
     /* qt creator only */
-    height:parent.height// 760
-    width:parent.width// 1080
+    height:/*parent.height*/ 760
+    width:/*parent.width*/ 1080
 
     /* greeter only
 * TextConstants { id: textConstants }
@@ -97,48 +98,48 @@ Item{
     property int windowHeight: main.height
 
     Settings{
-        property alias bgColour: main.backGroundColour
-        property alias gradient1: main.firstGradient
-        property alias gradient2: main.secondGradient
-        property alias gradient3: main.finalGradient
-        property alias txtColour: main.textColour
+        property alias bgColour:main.backGroundColour
+        property alias gradient1:main.firstGradient
+        property alias gradient2:main.secondGradient
+        property alias gradient3:main.finalGradient
+        property alias txtColour:main.textColour
     }
     /* greeter only */
 
-    //            Connections {
-    //                target: sddm
-    //                onLoginSucceeded: {
-    //                }
+    // Connections {
+    // target:sddm
+    // onLoginSucceeded:{
+    // }
 
-    //                onLoginFailed: {
-    //                    // txtMessage.text = 'login Failed'
-    //                    //   listView.currentItem.password = ""
-    //                }
-    //            }
+    // onLoginFailed:{
+    // // txtMessage.text = 'login Failed'
+    // // listView.currentItem.password = ""
+    // }
+    // }
 
     Rectangle{
-        id: backFrame
-        width: main.width
-        height: main.height
-        color: main.backGroundColour
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
+        id:backFrame
+        width:main.windowWidth
+        height:main.windowHeight
+        color:main.backGroundColour
+        anchors.verticalCenter:parent.verticalCenter
+        anchors.horizontalCenter:parent.horizontalCenter
 
 
         Rectangle{
-            anchors.fill: parent
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: main.backGroundColour }
-                GradientStop { position: 0.45; color: main.firstGradient }
-                GradientStop { position: 0.48; color: main.secondGradient }
-                GradientStop { position: 0.5; color: main.finalGradient }
-                GradientStop { position: 0.52; color: main.secondGradient }
-                GradientStop { position: 0.55; color: main.firstGradient }
-                GradientStop { position: 1.0; color: main.backGroundColour }
+            anchors.fill:parent
+            gradient:Gradient {
+                GradientStop { position:0.0; color:main.backGroundColour }
+                GradientStop { position:0.45; color:main.firstGradient }
+                GradientStop { position:0.48; color:main.secondGradient }
+                GradientStop { position:0.5; color:main.finalGradient }
+                GradientStop { position:0.52; color:main.secondGradient }
+                GradientStop { position:0.55; color:main.firstGradient }
+                GradientStop { position:1.0; color:main.backGroundColour }
             }
 
-            //  onStatusChanged: {
-            //  }
+            // onStatusChanged:{
+            // }
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.CrossCursor
@@ -151,132 +152,94 @@ Item{
             }
 
         }
-        //        Item {
+        // Item {
         ListModel {
-            id: mockSessionModel
-            ListElement {  file:"lxqt"; name:"lxqt desktop"; exec:"execlxqt"; comment:"qt based desktop";lastIndex :0}
-            ListElement {  file:"openbox"; name:"open box"; exec:"execobox"; comment:"meh"; lastIndex :1}
-            ListElement {  file:"lxdx"; name:"lxdx"; exec:"execobox"; comment:"meh2"; lastIndex :2}
-            ListElement {  file:"gdm"; name:"gdm"; exec:"execobox"; comment:"meh3"; lastIndex :3}
-            ListElement {  file:"kde"; name:"kde"; exec:"execobox"; comment:"meh4"; lastIndex :4}
+            id:mockSessionModel
+            ListElement { file:"lxqt"; name:"lxqt desktop"; exec:"execlxqt"; comment:"qt based desktop";lastIndex :0}
+            ListElement { file:"openbox"; name:"open box"; exec:"execobox"; comment:"meh"; lastIndex :1}
+            ListElement { file:"lxdx"; name:"lxdx"; exec:"execobox"; comment:"meh2"; lastIndex :2}
+            ListElement { file:"gdm"; name:"gdm"; exec:"execobox"; comment:"meh3"; lastIndex :3}
+            ListElement { file:"kde"; name:"kde"; exec:"execobox"; comment:"meh4"; lastIndex :4}
         }
         ListModel {
-            id: mockUserModel
-            ListElement {name:"media"; realName:"multi media"; homeDir:"~/"; icon:""; lastIndex:0; lastUser:0 }
-            ListElement {name:"dud"; realName:"dudhit"; homeDir:"~/"; icon:""; lastIndex:0; lastUser:0 }
+            id:mockUserModel
+            ListElement {name:"media"; realName:"multi media"; homeDir:"~/"; icon:"~/.face.icon"; lastIndex:0; lastUser:0 }
+            ListElement {name:"dud"; realName:"dudhit"; homeDir:"~/"; icon:"~/.face.icon"; lastIndex:0; lastUser:0 }
         }
         ListModel {
-            id: mockscreenModel
+            id:mockscreenModel
             ListElement { name:"screen"; geometry:1;primary :0}
         }
         Rectangle{
-            height: 3
-            width: parent.width
-            color: "#80808080"
+            height:3
+            width:parent.width
+            color:"#80808080"
             AnimatedSprite {
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.fill: parent
-                source: "anigreygrad.png"
-                frameWidth: 1
-                frameHeight: 3
-                frameCount: 9
-                frameDuration: 1300
-                interpolate: true
-                loops: AnimatedSprite.Infinite
+                anchors.verticalCenter:parent.verticalCenter
+                anchors.fill:parent
+                source:"anigreygrad.png"
+                frameWidth:1
+                frameHeight:3
+                frameCount:9
+                frameDuration:1300
+                interpolate:true
+                loops:AnimatedSprite.Infinite
             }
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: parent.horizontalCenter
-            MouseArea {
-                anchors.fill: parent
-                enabled: true
-                cursorShape: Qt.BlankCursor
-                //click to open menus
-                onClicked:{ console.log("clicked animatedLine")
-                    options.state = ""}
-            }
+            anchors.verticalCenter:parent.verticalCenter
+            anchors.horizontalCenter:parent.horizontalCenter
         }
         Rectangle{
             id:timeStatus
-            color: "#ff0000ff" //main.backGroundColour
+            color:"#ff0000ff" //main.backGroundColour
             y:(parent.height*0.10)
             x:0//parent.width*0.5
-            //  width: 0
-            //   height: 0 //(parent.height/4)*3
-            //focus: true
-            activeFocusOnTab: false
+            // width:0
+            // height:0 //(parent.height/4)*3
+            //focus:true
+            activeFocusOnTab:false
             TimeStamp{
                 id:clockShadow
                 x:2
                 y:2
-                timeFont: "Tahoma"
-                timeSize: 44
-                fontColour: main.firstGradient
+                timeFont:"Tahoma"
+                timeSize:44
+                fontColour:main.firstGradient
             }
             TimeStamp{
                 id:clock
-                timeFont: "Tahoma"
-                timeSize: 44
-                fontColour: main.textColour
+                timeFont:"Tahoma"
+                timeSize:44
+                fontColour:main.textColour
             }
 
 
-            SequentialAnimation{running: true
-                loops: Animation.Infinite
+            SequentialAnimation{running:true;loops:Animation.Infinite
 
-                NumberAnimation{
-                    id: clockFromRight
-                    target: timeStatus
-                    properties: "x"
-                    from:  main.width*.75
-                    to:10
-                    duration: 10000
-                }
-                NumberAnimation{
-                    id: clockToRight
-                    target: timeStatus
-                    properties: "x"
-                    from: 10
-                    to:main.width*.75
-                    duration: 10000
-                }
-
+                NumberAnimation{id:clockFromRight;target:timeStatus;properties:"x";from:main.width*.75;to:10;duration:10000;}
+                NumberAnimation{id:clockToRight;target:timeStatus;properties:"x";from:10;to:main.width*.75;duration:10000;}
             }
-            SequentialAnimation{running: true
-                loops: Animation.Infinite
-                NumberAnimation{
-                    id: shadowmove1
-                    target: clockShadow
-                    properties: "x"
-                    from: -2
-                    to:2
-                    duration: 5000
-                }
-                NumberAnimation{
-                    id: shadowmove2
-                    target: clockShadow
-                    properties: "x"
-                    from: 2
-                    to:-2
-                    duration: 5000
-                }
+            SequentialAnimation{running:true
+                loops:Animation.Infinite
+                NumberAnimation{id:shadowmove1;target:clockShadow;properties:"x";from:-2;to:2;duration:5000;}
+                NumberAnimation{id:shadowmove2;target:clockShadow;properties:"x";from:2;to:-2;duration:5000;}
             }
 
         }
         Rectangle{
 
             id:options
-            height: windowHeight*0.66
-            width: windowWidth
-            color: "#00808080"
-            anchors.verticalCenter: parent.verticalCenter
-            state: "showUsers"
-            onActiveFocusChanged: {
-                //  if (!activeFocus)             option1.state = ""
+            //height:100//main.windowHeight*0.66
+            width:main.windowWidth
+            color:"#99808080"
+            anchors.verticalCenter:parent.verticalCenter
+            state:"showUsers"
+            onActiveFocusChanged:{
+                // if (!activeFocus) options.state = ""
             }
 
 
             /* state change order showUsers>showPower>showSession */
-            states:  [
+            states:[
                 State {
                     name:""
                     PropertyChanges {target:userSelect;opacity:0 ;height:0 ;width:0 ; temporaryUntilContentInserted:false;}
@@ -307,8 +270,8 @@ Item{
 
 
             ]
-            transitions: Transition {
-                NumberAnimation {  properties: "opacity,height,x,width,panelHeaderPointsize"; duration: 1100; easing.type: Easing.OutInQuart }
+            transitions:Transition {
+                NumberAnimation { properties:"opacity,height,x,width,panelHeaderPointsize"; duration:1100; easing.type:Easing.OutInQuart }
             }
 
             Panel{
@@ -328,6 +291,7 @@ Item{
                 //                modelDelegate:UserView{}
                 //                listViewOrientation:  ListView.Horizontal
             }
+
             Panel{
                 id:desktopSelect
                 panelColour:backGroundTranspColour
@@ -341,9 +305,8 @@ Item{
                 anchors.verticalCenter:parent.verticalCenter
                 onGoLeft:options.state = "showPower"
                 onGoRight:options.state = "showUsers"
-
             }
-            Panel{
+            StaticPanel{
                 id:powerSelect
                 panelColour:backGroundTranspColour
                 panelNavColour:finalGradient
@@ -370,3 +333,9 @@ Item{
     }
 }
 
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.75}
+}
+##^##*/

@@ -1,6 +1,5 @@
 .face.icon
-greyPanelwork.qmlproject
-greyPanelwork.qmlproject.user
+greyPanelwork.qmlproject*
 oldMain.qml
 /SddmComponents/*
 Tester.qml
