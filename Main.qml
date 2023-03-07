@@ -169,14 +169,6 @@ Item{
             id: mockscreenModel
             ListElement { name:"screen"; geometry:1;primary :0}
         }
-        ListModel{
-            id: powerModel
-            ListElement{ availability:"canPowerOff";callFunction:"powerOff"}
-            ListElement{ availability:"canReboot";callFunction:"reboot"}
-            ListElement{ availability:"canSuspend";callFunction:"suspend"}
-            ListElement{ availability:"canHibernate";callFunction:"hibernate"}
-            ListElement{ availability:"canHybridSleep";callFunction:"hybridSleep"}
-        }
         Rectangle{
             height: 3
             width: parent.width
@@ -347,8 +339,8 @@ Item{
                 width:main.windowWidth*0.5
                 x:windowWidth*0.5-(width*.5)
                 anchors.verticalCenter:parent.verticalCenter
-                onGoLeft:options.state = "powerSelect"
-                onGoRight:options.state = "userSelect"
+                onGoLeft:options.state = "showPower"
+                onGoRight:options.state = "showUsers"
 
             }
             Panel{
@@ -362,8 +354,8 @@ Item{
                 width:main.windowWidth*0.5
                 x:windowWidth*0.5-(width*.5)
                 anchors.verticalCenter:parent.verticalCenter
-                onGoLeft:options.state = "userSelect"
-                onGoRight:options.state = "desktopSelect"
+                onGoLeft:options.state = "showUsers"
+                onGoRight:options.state = "showSession"
 
             }
 
