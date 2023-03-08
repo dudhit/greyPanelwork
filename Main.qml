@@ -23,12 +23,12 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
-import Qt.labs.settings 1.0
+
 
 /* greeter only */
 //import SddmComponents 2.0
 /* qt creator only */
-import "SddmComponents" as SddmComponents
+//import "SddmComponents" as SddmComponents
 
 /*sddm access
 https://github.com/sddm/sddm/blob/develop/docs/THEMING.md
@@ -80,42 +80,34 @@ userModel:
 Item{
     id:main
     visible:true
-    /* qt creator only */
-    height:/*parent.height*/ 760
-    width:/*parent.width*/ 1080
+    //sddm will force full screen but scrolling clock is static without a size
+    implicitHeight:/*parent.height*/ 108
+    implicitWidth:/*parent.width*/ 192
 
-    /* greeter only
-* TextConstants { id: textConstants }
-   greeter only */
     property int sessionIndex//: session.index
-    property color backGroundColour: "#ff000000"
-    property color backGroundTranspColour:"#00000000"
-    property color firstGradient: "#ff404040"
-    property color secondGradient: "#ffc0c0c0"
-    property color finalGradient: "#ffffffff"
-    property color textColour: "#ff000000"
+    property color backGroundColour: config.backGroundColour
+    property color backGroundTranspColour:config.backGroundTranspColour
+    property color firstGradient: config.firstGradient
+    property color secondGradient: config.secondGradient
+    property color finalGradient: config.finalGradient
+    property color textColour: config.textColour
     property int windowWidth: main.width
     property int windowHeight: main.height
 
-    Settings{
-        property alias bgColour:main.backGroundColour
-        property alias gradient1:main.firstGradient
-        property alias gradient2:main.secondGradient
-        property alias gradient3:main.finalGradient
-        property alias txtColour:main.textColour
-    }
+
     /* greeter only */
 
-    // Connections {
-    // target:sddm
-    // onLoginSucceeded:{
-    // }
+     Connections {
+         id:greeter
+     target:sddm
+    function onLoginSucceeded(){
+     }
 
-    // onLoginFailed:{
+    function onLoginFailed(){
     // // txtMessage.text = 'login Failed'
     // // listView.currentItem.password = ""
-    // }
-    // }
+     }
+     }
 
     Rectangle{
         id:backFrame
@@ -279,7 +271,7 @@ Item{
                 panelColour:backGroundTranspColour
                 panelNavColour:finalGradient
                 panelHeaderColour:panelHeaderColour
-                panelHeaderText:sddm.hostname+": User Login"
+                panelHeaderText:sddm.hostName+": User Login"
                 panelHeaderPointsize:24
                 height:main.windowHeight*0.65
                 width:main.windowWidth*0.5
@@ -297,7 +289,7 @@ Item{
                 panelColour:backGroundTranspColour
                 panelNavColour:finalGradient
                 panelHeaderColour:panelHeaderColour
-                panelHeaderText:sddm.hostname+ ": Desktop Selection"
+                panelHeaderText:sddm.hostName+" : Desktop Selection"
                 panelHeaderPointsize:24
                 height:main.windowHeight*0.65
                 width:main.windowWidth*0.5
@@ -311,7 +303,7 @@ Item{
                 panelColour:backGroundTranspColour
                 panelNavColour:finalGradient
                 panelHeaderColour:panelHeaderColour
-                panelHeaderText: sddm.hostname
+                panelHeaderText: sddm.hostName
                 panelHeaderPointsize:24
                 height:main.windowHeight*0.65
                 width:main.windowWidth*0.5

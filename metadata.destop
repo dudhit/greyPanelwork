@@ -1,0 +1,16 @@
+[SddmGreeterTheme]
+Name=GreyPanelWork
+Description=Originally concieved to look 80s futuristic. Mainly sick of the plain box dialogs of the late 2020s
+Author=justan o'strawman
+Copyright=(c) 2023, justan o'strawman
+License=CC BY-SA 4.0
+Type=sddm-theme
+Version=1
+Website=
+Screenshot=
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Email=justanotherstrawman@gmail.com
+Theme-Id=grey
+Theme-API=2.0
