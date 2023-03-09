@@ -1,116 +1,57 @@
+/***************************************************************************
+* Copyleft (CC BY-SA 4.0) 2023 Justan O'Strawman  <justanotherstrawman@gmail.com>
+* Permission is hereby granted, free of charge, to any person
+* obtaining a copy of this software and associated documentation
+* files (the "Software"), to deal in the Software without restriction,
+* including without limitation the rights to use, copy, modify, merge,
+* publish, distribute, sublicense, and/or sell copies of the Software,
+* and to permit persons to whom the Software is furnished to do so,
+* subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included
+* in all copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+* OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+* THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+* OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+* ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+* OR OTHER DEALINGS IN THE SOFTWARE.
+*
+***************************************************************************/
 import QtQuick 2.15
 import QtQuick.Layouts 1.12
 Rectangle{
     id:root
     implicitWidth:899
     implicitHeight: 800
-    color:"transparent"
+    color:"#00808080"
     property real allBright:1
     property real allDim:0.5
     property color allBkgnd:"#ff000070"
     property color allText:"#ff707070"
 
-/*    ListModel{
-//        id: powerModel
-//        ListElement{ name:"Power Off";show:"sddm.canPowerOff";callFunction:"sddm.powerOff()";bright:1;dim:0.75;colour:"#ff000070"}
-//        ListElement{ name:"Reboot";show:"sddm.canReboot";callFunction:"sddm.reboot()";bright:0.75;dim:0.7;colour:"#ff007070"}
-//        ListElement{ name:"Suspend";show:"sddm.canSuspend";callFunction:"sddm.suspend()";bright:1;dim:0.5;colour:"#ff700070"}
-//        ListElement{ name:"Hibernate";show:"sddm.canHibernate";callFunction:"sddm.hibernate()";bright:0.5;dim:0.25;colour:"#ff000070"}
-//        ListElement{ name:"Hybrid Sleep";show:"sddm.canHybridSleep";callFunction:"sddm.hybridSleep()";bright:1;dim:0;colour:"#ff707000"}
-//    }
-*/
     ColumnLayout{
-        clip:true
-        anchors.fill:parent
-        spacing: 20
-        TextGlowButton{
-            Layout.fillWidth: true
-            Layout.fillHeight:  true
-            label: "Power Off"
-            textCol:allText
-            buttonCol:allBkgnd
-            highOpacity:allBright
-            lowOpacity:allDim
-show:sddm.canPowerOff
-onAction: {console.log("power off")}
-
-        }
-        TextGlowButton{
-            Layout.fillWidth: true
-            Layout.fillHeight:  true
-            label: "Reboot"
-            textCol:allText
-            buttonCol:allBkgnd
-            highOpacity:allBright
-            lowOpacity:allDim
-            show:sddm.canReboot
-                onAction: {console.log("sddm.canReboot")}
-
-        }
-        TextGlowButton{
-            Layout.fillWidth: true
-            Layout.fillHeight:  true
-            label: "Suspend"
-            textCol:allText
-            buttonCol:allBkgnd
-            highOpacity:allBright
-            lowOpacity:allDim
-            show:sddm.canSuspend
-                onAction: {console.log("sddm.canSuspend")}
-
-
-        }
-        TextGlowButton{
-            Layout.fillWidth: true
-            Layout.fillHeight:  true
-            label: "Hibernate"
-            textCol:allText
-            buttonCol:allBkgnd
-            highOpacity:allBright
-            lowOpacity:allDim
-            show:sddm.canHibernate
-                onAction: {console.log("sddm.canHibernate")}
-
-
-        }
-        TextGlowButton{
-            Layout.fillWidth: true
-            Layout.fillHeight:  true
-            label: "Hybrid Sleep"
-            textCol:allText
-            buttonCol:allBkgnd
-            highOpacity:allBright
-            lowOpacity:allDim
-            show:sddm.canHybridSleep
-                onAction: {console.log("sddm.canHybridSleep")}
-
-
-        }
-
-/*        Repeater{
-//            id:repeater
-//            model: powerModel
-//            delegate: Component{
-                TextGlowButton{
-                    Layout.fillWidth: true
-                    Layout.fillHeight:  true
-                    label: model.name
-                    textCol:"#ffb0b0b0"
-                    buttonCol:model.colour
-                    highOpacity:model.bright
-                    lowOpacity:model.dim
-                    //  show:true
-                    //  textFont: "Tahoma"
-                    textSize: 20
-
-
-                }
-//            }
-//            Component.onCompleted: {
-//                console.log("finished:", repeater.itemAt(index))
-//                //     myRect.x = (function(){ return repeater.itemAt(0).x; }) //binding}
-*/
-    }
+ clip:true
+ anchors.fill:parent
+ spacing: 20
+ TextGlowButton{
+ Layout.fillWidth: true;Layout.fillHeight: true;label: "Power Off";textCol:allText;buttonCol:allBkgnd; highOpacity:allBright; lowOpacity:allDim;show:sddm.canPowerOff;onAction: {sddm.powerOff()}
+ }
+ TextGlowButton{
+ Layout.fillWidth: true; Layout.fillHeight: true; label: "Reboot"; textCol:allText; buttonCol:allBkgnd; highOpacity:allBright; lowOpacity:allDim; show:sddm.canReboot;onAction: {sddm.reboot()}
+ }
+ TextGlowButton{
+ Layout.fillWidth: true; Layout.fillHeight: true; label: "Suspend"; textCol:allText; buttonCol:allBkgnd; highOpacity:allBright; lowOpacity:allDim; show:sddm.canSuspend; onAction: {sddm.suspend()}
+ }
+ TextGlowButton{
+ Layout.fillWidth: true; Layout.fillHeight: true; label: "Hibernate"; textCol:allText; buttonCol:allBkgnd; highOpacity:allBright; lowOpacity:allDim;; show:sddm.canHibernate; onAction: {sddm.hibernate()}
+ }
+ TextGlowButton{
+ Layout.fillWidth: true; Layout.fillHeight: true; label: "Hybrid Sleep"; textCol:allText; buttonCol:allBkgnd; highOpacity:allBright; lowOpacity:allDim; show:sddm.canHybridSleep; onAction: {sddm.hybridSleep()}
+ }
+ }
 
 
 
