@@ -26,6 +26,7 @@ Rectangle{
     id:root
     implicitWidth:899
     implicitHeight: 800
+    anchors.fill:parent
     color:"#00808080"
     property real allBright:1
     property real allDim:0.5
@@ -46,7 +47,7 @@ Rectangle{
  Layout.fillWidth: true; Layout.fillHeight: true; label: "Suspend"; textCol:allText; buttonCol:allBkgnd; highOpacity:allBright; lowOpacity:allDim; show:sddm.canSuspend; onAction: {sddm.suspend()}
  }
  TextGlowButton{
- Layout.fillWidth: true; Layout.fillHeight: true; label: "Hibernate"; textCol:allText; buttonCol:allBkgnd; highOpacity:allBright; lowOpacity:allDim;; show:sddm.canHibernate; onAction: {sddm.hibernate()}
+ Layout.fillWidth: true; Layout.fillHeight: true; label: "Hibernate"; textCol:allText; buttonCol:allBkgnd; highOpacity:allBright; lowOpacity:allDim; show:sddm.canHibernate; onAction: {sddm.hibernate()}
  }
  TextGlowButton{
  Layout.fillWidth: true; Layout.fillHeight: true; label: "Hybrid Sleep"; textCol:allText; buttonCol:allBkgnd; highOpacity:allBright; lowOpacity:allDim; show:sddm.canHybridSleep; onAction: {sddm.hybridSleep()}

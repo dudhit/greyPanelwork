@@ -33,11 +33,11 @@ FocusScope{
     property string panelHeaderText: "Default header"
     property int panelHeaderPointsize: 24
     property string panelFont: "Tahoma"
-    property bool temporaryUntilContentInserted
-//    property ListModel modelItem
-//    property Component modelDelegate
+    property ListModel modelItem
+    property Component modelDelegate
 //    property string listViewOrientation
-//    property alias showList: contentLoader.active
+    property alias showList: panelLoader.active
+    property string loadThis
     signal goLeft()
     signal goRight()
     implicitWidth: 900
@@ -58,7 +58,7 @@ FocusScope{
                 height: panel.height*0.5
                 y:panel.height*0.25
                 buttonColour: panelNavColour
-                activeFocusOnTab: temporaryUntilContentInserted
+                activeFocusOnTab: showList
                 KeyNavigation.right:content
                 onSelectNav:{goLeft();}
             }
@@ -71,11 +71,11 @@ FocusScope{
                 onActiveFocusChanged:
                 {
                     if (activeFocus===true)
-                        temporaryUntilContentInserted=true;
+                        showList=true;
                     else
-                        temporaryUntilContentInserted=false;
+                        showList=false;
                 }
-                activeFocusOnTab: temporaryUntilContentInserted
+                activeFocusOnTab:  showList
                 Column{
                     spacing: 0
                     Text{
@@ -88,21 +88,25 @@ FocusScope{
                         font.family: panelFont
                         elide:Text.ElideRight
                     }
-                    Rectangle{
+                    Loader{
+                        id:panelLoader
                         width: content.width
                         height: content.height-panelHeader.height
-                        color: panelColour
+                        source: loadThis
+//                        onLoaded: {bindModel}
+//                        color: panelColour
+                        Binding{id:bindModel;target: panelLoader.item;property: "model";value: modelItem                    }
+                        Binding{id:bindView;target: panelLoader.item;property: "modelView";value: modelDelegate                    }
                     }
-                }
-            }
-
+             }
+}
             GlowButton {
                 id:navRight
                 width: panel.width*0.05
                 height: panel.height*0.5
                 y:panel.height*0.25
                 buttonColour: panelNavColour
-                activeFocusOnTab: temporaryUntilContentInserted
+                activeFocusOnTab: showList
                 KeyNavigation.left:content
                 onSelectNav:{goRight();}
             }

@@ -26,40 +26,43 @@ import QtQuick.Controls 2.12
 Item{
     id:root
     property alias model: listContainer.model
-    property alias delegate: listContainer.delegate
+    property alias modelView: listContainer.delegate
     property alias flow: listContainer.orientation
-   // width: 50
-//height: 50
+    implicitWidth: 50
+    implicitHeight:  50
     anchors.fill:parent
+Rectangle {
+    color: "#ff808080"
 
+    anchors.fill:parent
     ListView{
         id:listContainer
-        anchors.fill:parent
         clip:true
         focus: true
         snapMode: ListView.SnapOneItem
         keyNavigationEnabled: true
-        keyNavigationWraps: true        
-//        currentIndex: (model.lastIndex)?model.lastIndex:0
-//        activeFocusOnTab: false
-        onCurrentIndexChanged: {console.log("index changed to:",currentIndex);
+        keyNavigationWraps: true
+        anchors.fill:parent
+//implicitWidth: 600
+//implicitHeight: 400
+        onCurrentIndexChanged: {
+            console.log("index changed to:",currentIndex);
+          //  console.log("item:",currentItem.currentIndex);
         }
-//        onActiveFocusChanged: {
-//            console.log("panelList active focus is:",activeFocus)
-//        }
-//        onFocusChanged: { console.log("panelList focus is:",focus)
-//        }
+
         highlightFollowsCurrentItem: true
         highlight:  Rectangle {
             id:selectionRect
 
-                implicitWidth: 1920
-                implicitHeight: 10
+            implicitWidth: 1920
+            implicitHeight: 10
             radius: 20
-                           color: "#ff0000ff";  }
+            color: "#ff0000ff";  }
+        onModelChanged: { currentIndex: model.lastIndex}
     }
 
-    }
+}
+}
 
 
 /*##^##

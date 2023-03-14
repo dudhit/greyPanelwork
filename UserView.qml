@@ -24,104 +24,112 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 
 Component{
-    id:root
-    readonly property ListView lv:ListView.view
-//    color: firstGradient
-//    anchors.fill: parent
-//        clip: true
-
-    RowLayout {
-        id: rowLayout
-        //    implicitWidth:899
-        //    implicitHeight: 800
-//        anchors.fill: parent
-        focus: (lv.currentIndex === index) ? true : false
-        Text{
-            id:fullName
-            color: secondGradient
-            wrapMode: Text.WordWrap
-            Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-            minimumPointSize: 70
-            minimumPixelSize: 56
-            text: realName
-            font.pointSize:20
-            horizontalAlignment : Text.AlignLeft
-            Layout.fillWidth: true
-        }
-
-        Image {
-            id: face
-            verticalAlignment: Image.AlignLeft//.AlignVCenter
-            Layout.fillWidth: true
-            source: ".face.icon"
-            Layout.rowSpan: 1
-            fillMode: Image.Pad
-        }
-
-        ColumnLayout{
-            spacing: 0
+    Rectangle{
+        id:root
+        readonly property ListView lv:ListView.view
+        color: "#00808080"
+        //        anchors.fill: parent
+        implicitHeight: lv.height
+        implicitWidth: lv.width
+        GridLayout{
+            anchors.fill: parent
+            columns: 2
+            rows:4
             clip: true
-//                            state: (lv.currentIndex === index) ? "active" : ""
+            focus: (lv.currentIndex === index) ? true : false
+            Text{
+                id:fullName
+                Layout.row:0
+                Layout.column:0
+                Layout.fillWidth: true
+                color: secondGradient
+                wrapMode: Text.WordWrap
+                minimumPointSize: 70
+                minimumPixelSize: 56
+                text: model.realName
+                font.pointSize:20
+            }
 
-            //                onLogin: sddm.login(model.name, passwordFeild.text, sessionIndex);
-
+            Image {
+                id: face
+                Layout.row:1
+                Layout.column:0
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+//                visible:  (lv.currentIndex === index) ? true : false
+                source: ".face.icon"
+                fillMode: Image.Pad
+            }
 
             Text{
                 id:userName
-                color: secondGradient
-                //                implicitHeight: rect.height*0.25
-                wrapMode: Text.WordWrap
-                Layout.alignment: Qt.AlignLeft | Qt.AlignBaseline
-                //                Layout.margins: 30
-                text: name
-                font.pointSize:20
-                horizontalAlignment : Text.AlignHCenter
+                Layout.row:1
+                Layout.column:1
                 Layout.fillWidth: true
-
-
+                color: secondGradient
+                text: "User: "+model.name
+                visible:  (lv.currentIndex === index) ? true : false
+                wrapMode: Text.WordWrap
+                font.pointSize:20
+            }
+            Text{
+                id:prompt
+                Layout.row:2
+                Layout.column:0
+                Layout.columnSpan: 2
+                Layout.fillWidth: true
+                color: secondGradient
+                text: "enter password"
+                visible:  (lv.currentIndex === index) ? true : false
+                wrapMode: Text.WordWrap
+                font.pointSize:20
             }
 
             Rectangle {
                 id:textHolder
-                color: root.color
-                Layout.maximumWidth: 430
-                Layout.minimumHeight: 0
-                Layout.minimumWidth: 175
-                Layout.preferredWidth: -1
+                Layout.row:3
+                Layout.column:0
+                Layout.fillHeight: true
+                Layout.columnSpan: 2
+                color: firstGradient
+                visible:  (lv.currentIndex === index) ? true : false
+                Layout.maximumWidth: root.width
+                Layout.minimumHeight: 50
                 Layout.maximumHeight:  108
                 Layout.fillWidth: true
-                Layout.fillHeight: true
                 TextInput{
                     id:passwordFeild
-                    padding: 10
+                    //                    padding: 10
                     cursorVisible: true
                     anchors.fill: textHolder
+                    anchors.margins: 10
                     color: finalGradient
                     focus:true
-                    text:"g"
+                    text:""
                     echoMode:TextInput.Password
                     font.pointSize : 30
                     Keys.onPressed: (event)=> {
-                                        if (event.key ===event.key === Qt.Key_Enter ||event.key === Qt.Key_Return)
+                                        if (event.key === Qt.Key_Enter ||event.key === Qt.Key_Return)
                                         {
                                             lv.currentIndex=model.index; event.accepted = true;
-                                            console.log("keyboard event triggered");
+                                            console.log("pw is:",passwordFeild.text);
                                         }
                                     }
                 }
             }
 
-
+            //        onFocusChanged: {if(activeFocus === true){forceActiveFocus(passwordFeild)}}
         }
-    }
-
-    MouseArea{
-        anchors.fill: parent;
-        enabled: true;
-        onClicked:  {lv.currentIndex=model.index;
-            passwordFeild.focus=true;
-            console.log("model index:",model.index);
+        MouseArea{
+            anchors.fill: root
+            enabled: true;
+            onClicked:  {lv.currentIndex=model.index;
+                passwordFeild.focus=true;
+                console.log("model index:",model.index);
+            }
         }
+        Component.onCompleted: {console.log("view loaded")}
+        
     }
 }
 

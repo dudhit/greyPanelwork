@@ -97,17 +97,17 @@ Item{
 
     /* greeter only */
 
-     Connections {
-         id:greeter
-     target:sddm
-    function onLoginSucceeded(){
-     }
+//    Connections {
+//        id:greeter
+//        target:sddm
+//        function onLoginSucceeded(){
+//        }
 
-    function onLoginFailed(){
-    // // txtMessage.text = 'login Failed'
-    // // listView.currentItem.password = ""
-     }
-     }
+//        function onLoginFailed(){
+//            // // txtMessage.text = 'login Failed'
+//            // // listView.currentItem.password = ""
+//        }
+//    }
 
     Rectangle{
         id:backFrame
@@ -145,23 +145,7 @@ Item{
 
         }
         // Item {
-        ListModel {
-            id:mockSessionModel
-            ListElement { file:"lxqt"; name:"lxqt desktop"; exec:"execlxqt"; comment:"qt based desktop";lastIndex :0}
-            ListElement { file:"openbox"; name:"open box"; exec:"execobox"; comment:"meh"; lastIndex :1}
-            ListElement { file:"lxdx"; name:"lxdx"; exec:"execobox"; comment:"meh2"; lastIndex :2}
-            ListElement { file:"gdm"; name:"gdm"; exec:"execobox"; comment:"meh3"; lastIndex :3}
-            ListElement { file:"kde"; name:"kde"; exec:"execobox"; comment:"meh4"; lastIndex :4}
-        }
-        ListModel {
-            id:mockUserModel
-            ListElement {name:"media"; realName:"multi media"; homeDir:"~/"; icon:"~/.face.icon"; lastIndex:0; lastUser:0 }
-            ListElement {name:"dud"; realName:"dudhit"; homeDir:"~/"; icon:"~/.face.icon"; lastIndex:0; lastUser:0 }
-        }
-        ListModel {
-            id:mockscreenModel
-            ListElement { name:"screen"; geometry:1;primary :0}
-        }
+
         Rectangle{
             height:3
             width:parent.width
@@ -234,30 +218,30 @@ Item{
             states:[
                 State {
                     name:""
-                    PropertyChanges {target:userSelect;opacity:0 ;height:0 ;width:0 ; temporaryUntilContentInserted:false;}
-                    PropertyChanges {target:powerSelect ;opacity:0 ;height:0 ;width:0  ; temporaryUntilContentInserted:false;}
-                    PropertyChanges {target:desktopSelect;opacity:0 ; height:0; width:0 ; temporaryUntilContentInserted:false;}
+                                        PropertyChanges {target:userSelect;opacity:0 ;height:0 ;width:0 ; showList:false;}
+                    PropertyChanges {target:powerSelect ;opacity:0 ;height:0 ;width:0  ; showList:false;}
+                    PropertyChanges {target:desktopSelect;opacity:0 ; height:0; width:0 ; showList:false;}
                 },
                 State {
                     name:"showUsers"
-                    PropertyChanges { target:userSelect; opacity:1 ; height:windowHeight*0.65; width:windowWidth*0.5 ; x:parent.width*0.5-(width*.5);temporaryUntilContentInserted:true; }
-                    PropertyChanges { target:powerSelect; opacity:0; height:0; width:0 ; x:windowWidth; panelHeaderPointsize:1;temporaryUntilContentInserted:false;}
-                    PropertyChanges { target:desktopSelect; opacity:0 ; height:0; width:0; x:0; panelHeaderPointsize:1; temporaryUntilContentInserted:false;}
+                    PropertyChanges { target:userSelect; opacity:1 ; height:windowHeight*0.65; width:windowWidth*0.5 ; x:parent.width*0.5-(width*.5);showList:true; }
+                    PropertyChanges { target:powerSelect; opacity:0; height:0; width:0 ; x:windowWidth; panelHeaderPointsize:1;showList:false;}
+                    PropertyChanges { target:desktopSelect; opacity:0 ; height:0; width:0; x:0; panelHeaderPointsize:1; showList:false;}
 
                 },
 
                 State {
                     name:"showPower"
-                    PropertyChanges { target:userSelect ; opacity:0 ; height:0 ; width:0 ; x:0 ; panelHeaderPointsize:1;temporaryUntilContentInserted:false;}
-                    PropertyChanges { target:powerSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:windowWidth*0.5-(width*.5);temporaryUntilContentInserted:true;  }
-                    PropertyChanges { target:desktopSelect; opacity:0; height:0; width:0; x:windowWidth; panelHeaderPointsize:1; temporaryUntilContentInserted:false;}
+                    PropertyChanges { target:userSelect ; opacity:0 ; height:0 ; width:0 ; x:0 ; panelHeaderPointsize:1;showList:false;}
+                    PropertyChanges { target:powerSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:windowWidth*0.5-(width*.5);showList:true;  }
+                    PropertyChanges { target:desktopSelect; opacity:0; height:0; width:0; x:windowWidth; panelHeaderPointsize:1; showList:false;}
                 },
 
                 State {
                     name:"showSession"
-                    PropertyChanges { target:userSelect; opacity:0; height:0; width:0; x:windowWidth ;panelHeaderPointsize:1;temporaryUntilContentInserted:false;}
-                    PropertyChanges { target:powerSelect; opacity:0; height:0; width:0; x:0; panelHeaderPointsize:1;temporaryUntilContentInserted:false;}
-                    PropertyChanges { target:desktopSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:parent.width*0.5-(width*.5);temporaryUntilContentInserted:true; }
+                    PropertyChanges { target:userSelect; opacity:0; height:0; width:0; x:windowWidth ;panelHeaderPointsize:1;showList:false;}
+                    PropertyChanges { target:powerSelect; opacity:0; height:0; width:0; x:0; panelHeaderPointsize:1;showList:false;}
+                    PropertyChanges { target:desktopSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:parent.width*0.5-(width*.5);showList:true; }
                 }
 
 
@@ -279,6 +263,9 @@ Item{
                 anchors.verticalCenter:parent.verticalCenter
                 onGoLeft:options.state = "showSession"
                 onGoRight:options.state = "showPower"
+                loadThis: "Selector.qml"
+                                  modelItem:userModel
+                  modelDelegate:UserView{}
                 //                modelItem:mockUserModel
                 //                modelDelegate:UserView{}
                 //                listViewOrientation:  ListView.Horizontal
@@ -311,6 +298,7 @@ Item{
                 anchors.verticalCenter:parent.verticalCenter
                 onGoLeft:options.state = "showUsers"
                 onGoRight:options.state = "showSession"
+                loadThis: "PowerView.qml"
 
             }
 
