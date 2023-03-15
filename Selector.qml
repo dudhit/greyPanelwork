@@ -32,7 +32,7 @@ Item{
     implicitHeight:  50
     anchors.fill:parent
 Rectangle {
-    color: "#ff808080"
+    color: "#00808080"
 
     anchors.fill:parent
     ListView{
@@ -45,19 +45,18 @@ Rectangle {
         anchors.fill:parent
 //implicitWidth: 600
 //implicitHeight: 400
-        onCurrentIndexChanged: {
-            console.log("index changed to:",currentIndex);
-          //  console.log("item:",currentItem.currentIndex);
-        }
+//        onCurrentIndexChanged: {
+//            console.log("index changed to:",currentIndex);
+//        }
 
-        highlightFollowsCurrentItem: true
-        highlight:  Rectangle {
-            id:selectionRect
+//        highlightFollowsCurrentItem: true
+//        highlight:  Rectangle {
+//            id:selectionRect
 
-            implicitWidth: 1920
-            implicitHeight: 10
-            radius: 20
-            color: "#ff0000ff";  }
+//            implicitWidth: currentItem.width
+//            implicitHeight: currentItem.height
+//            radius: 20
+//            color: "#ff0000ff";  }
         onModelChanged: { currentIndex: model.lastIndex}
     }
 

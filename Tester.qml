@@ -55,8 +55,8 @@ Window{
     }
     ListModel {
         id:userModel
-        ListElement {name:"media"; realName:"multi media"; homeDir:"~/"; icon:"~/.face.icon"; lastIndex:0; lastUser:0 }
-        ListElement {name:"dud"; realName:"dudhit"; homeDir:"~/"; icon:"~/.face.icon"; lastIndex:1; lastUser:0 }
+        ListElement {name:"media"; realName:"multi media"; homeDir:"~/"; icon:".face.icon"; lastIndex:0; lastUser:1 }
+        ListElement {name:"dud"; realName:"dudhit"; homeDir:"~/"; icon:".face.icon"; lastIndex:1; lastUser:1 }
     }
     ListModel {
         id:screenModel
@@ -65,7 +65,7 @@ Window{
     QtObject{
         id:config
         property color backGroundColour: "#ff000000"
-        property color backGroundTranspColour:"#800000ff"
+        property color backGroundTranspColour:"#000000ff"
         property color firstGradient: "#ff404040"
         property color secondGradient: "#ffc0c0c0"
         property color finalGradient: "#ffeeeeee"

@@ -35,7 +35,7 @@ FocusScope{
     property string panelFont: "Tahoma"
     property ListModel modelItem
     property Component modelDelegate
-//    property string listViewOrientation
+    property int listViewOrientation
     property alias showList: panelLoader.active
     property string loadThis
     signal goLeft()
@@ -59,7 +59,7 @@ FocusScope{
                 y:panel.height*0.25
                 buttonColour: panelNavColour
                 activeFocusOnTab: showList
-                KeyNavigation.right:content
+                KeyNavigation.right:panelLoader
                 onSelectNav:{goLeft();}
             }
 
@@ -71,11 +71,14 @@ FocusScope{
                 onActiveFocusChanged:
                 {
                     if (activeFocus===true)
-                        showList=true;
-                    else
-                        showList=false;
+                    {forceActiveFocus(panelLoader);
+//                        showList=true;
                 }
-                activeFocusOnTab:  showList
+                    else{
+//                        showList=false;
+                }
+                }
+//                activeFocusOnTab:  showList
                 Column{
                     spacing: 0
                     Text{
@@ -93,13 +96,25 @@ FocusScope{
                         width: content.width
                         height: content.height-panelHeader.height
                         source: loadThis
-//                        onLoaded: {bindModel}
-//                        color: panelColour
-                        Binding{id:bindModel;target: panelLoader.item;property: "model";value: modelItem                    }
-                        Binding{id:bindView;target: panelLoader.item;property: "modelView";value: modelDelegate                    }
+                        onLoaded: {
+                            if (modelItem)
+                            {
+                                item.model=modelItem;
+                            }
+                            if (modelDelegate)
+                            {
+                                item.modelView=modelDelegate;
+                            }    if (listViewOrientation)
+                            {
+                                item.flow=listViewOrientation;
+                            }
+                            forceActiveFocus(item)
+                            //Binding{id:bindModel;target: panelLoader.item;property: "model";value: modelItem;when:panelLoader.status=ready                    }
+                            //Binding{id:bindView;target: panelLoader.item;property: "modelView";value: modelDelegate;when:panelLoader.status=ready                    }
+                        }
                     }
-             }
-}
+                }
+            }
             GlowButton {
                 id:navRight
                 width: panel.width*0.05
@@ -107,13 +122,13 @@ FocusScope{
                 y:panel.height*0.25
                 buttonColour: panelNavColour
                 activeFocusOnTab: showList
-                KeyNavigation.left:content
+                KeyNavigation.left:panelLoader
                 onSelectNav:{goRight();}
             }
+
         }
+
     }
-
 }
-
 
 

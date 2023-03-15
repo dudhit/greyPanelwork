@@ -266,9 +266,7 @@ Item{
                 loadThis: "Selector.qml"
                                   modelItem:userModel
                   modelDelegate:UserView{}
-                //                modelItem:mockUserModel
-                //                modelDelegate:UserView{}
-                //                listViewOrientation:  ListView.Horizontal
+                                listViewOrientation:  1
             }
 
             Panel{
