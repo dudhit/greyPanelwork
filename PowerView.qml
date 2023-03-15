@@ -1,3 +1,5 @@
+import QtQuick 2.15
+import QtQuick.Layouts 1.12
 /***************************************************************************
 * Copyleft (CC BY-SA 4.0) 2023 Justan O'Strawman  <justanotherstrawman@gmail.com>
 * Permission is hereby granted, free of charge, to any person
@@ -20,8 +22,6 @@
 * OR OTHER DEALINGS IN THE SOFTWARE.
 *
 ***************************************************************************/
-import QtQuick 2.15
-import QtQuick.Layouts 1.12
 Rectangle{
     id:root
     implicitWidth:899
