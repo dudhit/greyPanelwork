@@ -25,37 +25,124 @@ import QtQuick.Layouts 1.12
 Rectangle{
     id:root
     implicitWidth:899
-    implicitHeight: 800
+    implicitHeight:800
     anchors.fill:parent
     color:"#00808080"
     property real allBright:1
-    property real allDim:0.5
+    property real allDim:0.1
     property color allBkgnd:"#ff000070"
     property color allText:"#ff707070"
+    property string allTextFont:"Tahoma"
+    property int allTextSize:24
+    property int gap:20
 
-    ColumnLayout{
- clip:true
- anchors.fill:parent
- spacing: 20
- TextGlowButton{
- Layout.fillWidth: true;Layout.fillHeight: true;label: "Power Off";textCol:allText;buttonCol:allBkgnd; highOpacity:allBright; lowOpacity:allDim;show:sddm.canPowerOff;onAction: {sddm.powerOff()}
- }
- TextGlowButton{
- Layout.fillWidth: true; Layout.fillHeight: true; label: "Reboot"; textCol:allText; buttonCol:allBkgnd; highOpacity:allBright; lowOpacity:allDim; show:sddm.canReboot;onAction: {sddm.reboot()}
- }
- TextGlowButton{
- Layout.fillWidth: true; Layout.fillHeight: true; label: "Suspend"; textCol:allText; buttonCol:allBkgnd; highOpacity:allBright; lowOpacity:allDim; show:sddm.canSuspend; onAction: {sddm.suspend()}
- }
- TextGlowButton{
- Layout.fillWidth: true; Layout.fillHeight: true; label: "Hibernate"; textCol:allText; buttonCol:allBkgnd; highOpacity:allBright; lowOpacity:allDim; show:sddm.canHibernate; onAction: {sddm.hibernate()}
- }
- TextGlowButton{
- Layout.fillWidth: true; Layout.fillHeight: true; label: "Hybrid Sleep"; textCol:allText; buttonCol:allBkgnd; highOpacity:allBright; lowOpacity:allDim; show:sddm.canHybridSleep; onAction: {sddm.hybridSleep()}
- }
- }
+    onActiveFocusChanged:{if (activeFocus) ;console.log("viewroot")}
 
+    Column{
+        clip:true
+        anchors.fill:parent
+        spacing:gap
+        onActiveFocusChanged:{if (activeFocus) ;console.log("column")}
+        GlowButton{id:power;
+        visible:sddm.canPowerOff;
+            width:parent.width
+            height: parent.height*0.2-gap;
+            navBright:allBright;navDim:allDim;buttonColour:allBkgnd;onSelectNav:{sddm.powerOff();console.log("off")}
+            }
+        GlowButton{id:reboot;
+        visible:sddm.canReboot;
+            width:parent.width
+            height:parent.height*0.2-gap
+            navBright:allBright;navDim:allDim;buttonColour:allBkgnd;onSelectNav:{sddm.reboot();console.log("reboot")}
+            }
+        GlowButton{id:suspend;
+        visible:sddm.canSuspend;
+            width:parent.width
+            height:parent.height*0.2-gap
+            navBright:allBright;navDim:allDim;buttonColour:allBkgnd;onSelectNav:{sddm.suspend();console.log("susp")}
+            }
+        GlowButton{id:hibernate;
+        visible:sddm.canHibernate;
+            width:parent.width
+            height:parent.height*0.2-gap
+            navBright:allBright;navDim:allDim;buttonColour:allBkgnd;onSelectNav:{sddm.hibernate();console.log("hyber")}
+            }
+        GlowButton{id:sleep;
+        visible:sddm.canHybridSleep;
+            width:parent.width
+            height:parent.height*0.2-gap
+            navBright:allBright;navDim:allDim;buttonColour:allBkgnd;onSelectNav:{sddm.hybridSleep();console.log("sleep")}
+            }
+    }
+    Column{
+        clip:true
+        anchors.fill:parent
+        spacing:gap
+        onActiveFocusChanged:{if (activeFocus) ;console.log("column")}
 
-
+        Text{
+            text:"Power Off";
+            color:allText;
+            width:parent.width
+            height:parent.height*0.2-gap
+            font.pointSize:allTextSize;font.family:allTextFont;
+            wrapMode:Text.WordWrap;
+            minimumPointSize:70;minimumPixelSize:20
+            horizontalAlignment:Text.AlignHCenter;verticalAlignment:Text.AlignVCenter
         }
+        Text{
+            text:"Reboot";
+            color:allText;
+            width:parent.width
+            height:parent.height*0.2-gap
+            font.pointSize:allTextSize;font.family:allTextFont;
+            wrapMode:Text.WordWrap;
+            minimumPointSize:70;minimumPixelSize:20
+            horizontalAlignment:Text.AlignHCenter;verticalAlignment:Text.AlignVCenter
+        }
+        Text{
+            text:"Suspend";
+            color:allText;
+            width:parent.width
+            height:parent.height*0.2-gap
+            font.pointSize:allTextSize;font.family:allTextFont;
+            wrapMode:Text.WordWrap;
+            minimumPointSize:70;minimumPixelSize:20
+            horizontalAlignment:Text.AlignHCenter;verticalAlignment:Text.AlignVCenter
+        }
+        Text{
+            text:"Hibernate";
+            color:allText;
+            width:parent.width
+            height:parent.height*0.2-gap
+            font.pointSize:allTextSize;font.family:allTextFont;
+            wrapMode:Text.WordWrap;
+            minimumPointSize:70;minimumPixelSize:20
+            horizontalAlignment:Text.AlignHCenter;verticalAlignment:Text.AlignVCenter
+        }
+        Text{
+            text:"Hybrid Sleep";
+            color:allText;
+            width:parent.width
+            height:parent.height*0.2-gap
+            font.pointSize:allTextSize;font.family:allTextFont;
+            wrapMode:Text.WordWrap;
+            minimumPointSize:70;minimumPixelSize:20
+            horizontalAlignment:Text.AlignHCenter;verticalAlignment:Text.AlignVCenter
+        }
+    }
+    //        {  //
+    ////            activeFocusOnTab:root.activeFocusOnTab;
+    //              //                 KeyNavigation.tab:reboot;KeyNavigation.backtab:sleep
+    //                          KeyNavigation.down:reboot;KeyNavigation.up:sleep;
+    ////                 KeyNavigation.tab:suspend;KeyNavigation.backtab:power
+    //            KeyNavigation.down:suspend;KeyNavigation.up:power;
+    ////                 KeyNavigation.tab:hibernate;KeyNavigation.backtab:reboot
+    //            KeyNavigation.down:hibernate;KeyNavigation.up:reboot;
+    ////                 KeyNavigation.tab:sleep;KeyNavigation.backtab:suspend
+    //            KeyNavigation.down:sleep;KeyNavigation.up:suspend;
+    ////                 KeyNavigation.tab:power;KeyNavigation.backtab:hibernate
+    //            KeyNavigation.down:power;KeyNavigation.up:hibernate;
 
+}
 
