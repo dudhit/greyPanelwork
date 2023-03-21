@@ -28,53 +28,63 @@ import QtQuick.Window 2.15
 
 Window{
     id:sddm
-    height: 760
-    width: 1080
-    onActiveFocusItemChanged: console.log("activeFocusItem", activeFocusItem)
+    height:760
+    width:1080
+    onActiveFocusItemChanged:console.log("activeFocusItem", activeFocusItem)
     property bool canPowerOff:true
     property bool canReboot:true
     property bool canSuspend:true
-    property bool canHibernate:false
+    property bool canHibernate:true
     property bool canHybridSleep:true
-    property string hostName: qsTr("my pc")//sddm DOES NOT PROVIDE
+    property string hostName:qsTr("my pc")//sddm DOES NOT PROVIDE
 
-    property color backGroundColour: config.backGroundColour
+    property color backGroundColour:config.backGroundColour
     property color backGroundTranspColour:config.backGroundTranspColour
-    property color firstGradient: config.firstGradient
-    property color secondGradient: config.secondGradient
-    property color finalGradient: config.finalGradient
-    property color textColour: config.textColour
-    property int windowWidth: sddm.width
-    property int windowHeight: sddm.height
+    property color firstGradient:config.firstGradient
+    property color secondGradient:config.secondGradient
+    property color finalGradient:config.finalGradient
+    property color textColour:config.textColour
+    property int windowWidth:sddm.width
+    property int windowHeight:sddm.height
     ListModel {
         id:sessionModel
-        ListElement { file:"lxqt"; name:"lxqt desktop"; exec:"execlxqt"; comment:"qt based desktop";lastIndex :0}
-        ListElement { file:"openbox"; name:"open box"; exec:"execobox"; comment:"meh"; lastIndex :1}
-        ListElement { file:"lxdx"; name:"lxdx"; exec:"execobox"; comment:"meh2"; lastIndex :2}
-        ListElement { file:"gdm"; name:"gdm"; exec:"execobox"; comment:"meh3"; lastIndex :3}
-        ListElement { file:"kde"; name:"kde"; exec:"execobox"; comment:"meh4"; lastIndex :4}
+        ListElement { file:"lxqt";name:"lxqt desktop";exec:"execlxqt";comment:"qt based desktop";lastIndex:0}
+        ListElement { file:"openbox";name:"open box";exec:"execobox";comment:"meh";lastIndex:1}
+        ListElement { file:"lxdx";name:"lxdx";exec:"execobox";comment:"meh2";lastIndex:2}
+        ListElement { file:"gdm";name:"gdm";exec:"execobox";comment:"meh3";lastIndex:3}
+        ListElement { file:"kde";name:"kde";exec:"execobox";comment:"meh4";lastIndex:4}
     }
     ListModel {
         id:userModel
-        ListElement {name:"media"; realName:"multi media"; homeDir:"~/"; icon:".face.icon"; lastIndex:0; lastUser:1 }
-        ListElement {name:"dud"; realName:"dudhit"; homeDir:"~/"; icon:".face.icon"; lastIndex:1; lastUser:1 }
+        ListElement {name:"media";realName:"multi media";homeDir:"";icon:".face.icon";lastIndex:1;lastUser:1 }
+        ListElement {name:"dud";realName:"dudhit";homeDir:"/home/dud";icon:".face.icon";lastIndex:1;lastUser:1 }
+        ListElement {name:"fman";realName:"frederic";homeDir:"/home/fman";icon:".face.icon";lastIndex:1;lastUser:1 }
+        ListElement {name:"hijinx";realName:"marjory";homeDir:"/home/hijinx";icon:".face.icon";lastIndex:1;lastUser:1 }
+        ListElement {name:"lolcatz";realName:"elenor";homeDir:"/home/lolcatz";icon:".face.icon";lastIndex:1;lastUser:1 }
+
+
     }
     ListModel {
         id:screenModel
-        ListElement { name:"screen"; geometry:1;primary :0}
+        ListElement { name:"screen";geometry:1;primary:0}
     }
     QtObject{
         id:config
-        property color backGroundColour: "#ff000000"
+        property color backGroundColour:"#ff000000"
         property color backGroundTranspColour:"#000000ff"
-        property color firstGradient: "#ff404040"
-        property color secondGradient: "#ffc0c0c0"
-        property color finalGradient: "#ffeeeeee"
-        property color textColour: "#ff000000"
+        property color firstGradient:"#ff404040"
+        property color secondGradient:"#ffc0c0c0"
+        property color finalGradient:"#ffeeeeee"
+        property color textColour:"#ff000000"
     }
 
+function powerOff(){console.log("your function executed")}
+function suspend(){console.log("your function executed")}
+function reboot(){console.log("your function executed")}
+function hibernate(){console.log("your function executed")}
+function hybridSleep(){console.log("your function executed")}
 
-        Main{ height:sddm.height; width: sddm.width }
+        Main{ height:sddm.height;width:sddm.width }
     // PowerView{}
-//    Selector{        model: userModel;        modelView: UserView{};        flow:ListView.Horizontal    }
+//    Selector{        model:userModel;   modelView:UserView{};   flow:ListView.Horizontal    }
 }

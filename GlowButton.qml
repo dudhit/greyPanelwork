@@ -74,10 +74,10 @@ FocusScope {
             enabled: true
             hoverEnabled:true
             onClicked: {root.selectNav();}
-            onEntered: {anime.stop();glowButton.state="hasFocus";root.hoverNav();glowButton.forceActiveFocus();}
+            onEntered: {anime.stop();glowButton.state="hasFocus";root.hoverNav();forceActiveFocus(glowButton);}
             onExited: {anime.start();glowButton.state="";root.unHoverNav();}
         }
-        Keys.onPressed: (event)=> {  if (event.key === Qt.Key_Space){  root.selectNav(); event.accepted = true;}}
+        Keys.onPressed: (event)=> {  if (event.key === Qt.Key_Space){  root.selectNav();event.accepted = true;}}
 
         SequentialAnimation {
             id:anime

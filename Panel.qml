@@ -27,76 +27,77 @@ import QtQuick.Layouts 1.12
 FocusScope{
     id:root
 
-    property color panelColour: "#ff000000"
-    property color panelHeaderColour: "#ffffffff"
-    property color panelNavColour: "#ffffffff"
-    property string panelHeaderText: "Default header"
-    property int panelHeaderPointsize: 24
-    property string panelFont: "Tahoma"
+    property color panelColour:"#ff000000"
+    property color panelHeaderColour:"#ffffffff"
+    property color panelNavColour:"#ffffffff"
+    property string panelHeaderText:"Default header"
+    property int panelHeaderPointsize:24
+    property string panelFont:"Tahoma"
     property ListModel modelItem
     property Component modelDelegate
     property int listViewOrientation
-    property alias showList: panelLoader.active
+    property bool showList:false
     property string loadThis
     signal goLeft()
     signal goRight()
-    implicitWidth: 900
-    implicitHeight: 500
-    clip: true
+    implicitWidth:900
+    implicitHeight:500
+    clip:true
     Rectangle{
-        id: panel
-        color: panelColour
+        id:panel
+        color:panelColour
         anchors.fill:parent
 
         Row{
-            id: row
+            id:row
             anchors.fill:parent
-            spacing: 0
+            spacing:0
             GlowButton {
                 id:navLeft
-                width: panel.width*0.05
-                height: panel.height*0.5
+                width:panel.width*0.05
+                height:panel.height*0.5
                 y:panel.height*0.25
-                buttonColour: panelNavColour
-                activeFocusOnTab: showList
-                KeyNavigation.right:panelLoader
+                buttonColour:panelNavColour
+                activeFocusOnTab:showList
+                KeyNavigation.tab:panelLoader
+                KeyNavigation.backtab:navRight
                 onSelectNav:{goLeft();}
             }
 
             Rectangle {
                 id:content
-                width: panel.width*0.9
-                height: panel.height
-                color: panelColour
+                width:panel.width*0.9
+                height:panel.height
+                color:panelColour
                 onActiveFocusChanged:
                 {
                     if (activeFocus===true)
-                    {forceActiveFocus(panelLoader);
-//                        showList=true;
+                    {forceActiveFocus(panelLoader);}
                 }
-                    else{
-//                        showList=false;
-                }
-                }
-//                activeFocusOnTab:  showList
+
                 Column{
-                    spacing: 0
+                    spacing:0
                     Text{
                         id:panelHeader
-                        width: content.width
-                        wrapMode: Text.WordWrap
+                        width:content.width
+                        wrapMode:Text.WordWrap
                         text:panelHeaderText
-                        color: panelHeaderColour
-                        font.pointSize: panelHeaderPointsize
-                        font.family: panelFont
+                        color:panelHeaderColour
+                        font.pointSize:panelHeaderPointsize
+                        font.family:panelFont
                         elide:Text.ElideRight
                     }
                     Loader{
                         id:panelLoader
-                        width: content.width
-                        height: content.height-panelHeader.height
-                        source: loadThis
-                        onLoaded: {
+                        width:content.width
+                        height:content.height-panelHeader.height
+                        source:loadThis
+                        KeyNavigation.tab:navRight
+                        KeyNavigation.backtab:navLeft
+                        active: showList;
+                        activeFocusOnTab:showList
+                        onLoaded:{
+                            item.activeFocusOnTab=showList;
                             if (modelItem)
                             {
                                 item.model=modelItem;
@@ -104,25 +105,25 @@ FocusScope{
                             if (modelDelegate)
                             {
                                 item.modelView=modelDelegate;
-                            }    if (listViewOrientation)
+                            }
+                            if (listViewOrientation)
                             {
                                 item.flow=listViewOrientation;
                             }
-                            forceActiveFocus(item)
-                            //Binding{id:bindModel;target: panelLoader.item;property: "model";value: modelItem;when:panelLoader.status=ready                    }
-                            //Binding{id:bindView;target: panelLoader.item;property: "modelView";value: modelDelegate;when:panelLoader.status=ready                    }
-                        }
+//                           forceActiveFocus(item)
+                         }
                     }
                 }
             }
             GlowButton {
                 id:navRight
-                width: panel.width*0.05
-                height: panel.height*0.5
+                width:panel.width*0.05
+                height:panel.height*0.5
                 y:panel.height*0.25
-                buttonColour: panelNavColour
-                activeFocusOnTab: showList
-                KeyNavigation.left:panelLoader
+                buttonColour:panelNavColour
+                activeFocusOnTab:showList
+                KeyNavigation.tab:navLeft
+                KeyNavigation.backtab:panelLoader
                 onSelectNav:{goRight();}
             }
 

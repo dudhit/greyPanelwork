@@ -84,15 +84,15 @@ Item{
     implicitHeight:/*parent.height*/ 108
     implicitWidth:/*parent.width*/ 192
 
-    property int sessionIndex//: session.index
-    property color backGroundColour: config.backGroundColour
+    property int sessionIndex//:session.index
+    property color backGroundColour:config.backGroundColour
     property color backGroundTranspColour:config.backGroundTranspColour
-    property color firstGradient: config.firstGradient
-    property color secondGradient: config.secondGradient
-    property color finalGradient: config.finalGradient
-    property color textColour: config.textColour
-    property int windowWidth: main.width
-    property int windowHeight: main.height
+    property color firstGradient:config.firstGradient
+    property color secondGradient:config.secondGradient
+    property color finalGradient:config.finalGradient
+    property color textColour:config.textColour
+    property int windowWidth:main.width
+    property int windowHeight:main.height
 
 
     /* greeter only */
@@ -133,9 +133,9 @@ Item{
             // onStatusChanged:{
             // }
             MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.CrossCursor
-                onClicked: {
+                anchors.fill:parent
+                cursorShape:Qt.CrossCursor
+                onClicked:{
                     if (options.state === "")
                         options.state="showUsers"
                     else
@@ -218,30 +218,30 @@ Item{
             states:[
                 State {
                     name:""
-                                        PropertyChanges {target:userSelect;opacity:0 ;height:0 ;width:0 ; showList:false;}
-                    PropertyChanges {target:powerSelect ;opacity:0 ;height:0 ;width:0  ; showList:false;}
-                    PropertyChanges {target:desktopSelect;opacity:0 ; height:0; width:0 ; showList:false;}
+                                        PropertyChanges {target:userSelect;opacity:0;height:0;width:0; showList:false;}
+                    PropertyChanges {target:powerSelect;opacity:0;height:0;width:0 ; showList:false;}
+                    PropertyChanges {target:desktopSelect;opacity:0; height:0; width:0; showList:false;}
                 },
                 State {
                     name:"showUsers"
-                    PropertyChanges { target:userSelect; opacity:1 ; height:windowHeight*0.65; width:windowWidth*0.5 ; x:parent.width*0.5-(width*.5);showList:true; }
-                    PropertyChanges { target:powerSelect; opacity:0; height:0; width:0 ; x:windowWidth; panelHeaderPointsize:1;showList:false;}
-                    PropertyChanges { target:desktopSelect; opacity:0 ; height:0; width:0; x:0; panelHeaderPointsize:1; showList:false;}
+                    PropertyChanges { target:userSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:parent.width*0.5-(width*.5);showList:true;}
+                    PropertyChanges { target:powerSelect; opacity:0; height:0; width:0; x:windowWidth; panelHeaderPointsize:1;showList:false;}
+                    PropertyChanges { target:desktopSelect; opacity:0; height:0; width:0; x:0; panelHeaderPointsize:1; showList:false;}
 
                 },
 
                 State {
                     name:"showPower"
-                    PropertyChanges { target:userSelect ; opacity:0 ; height:0 ; width:0 ; x:0 ; panelHeaderPointsize:1;showList:false;}
+                    PropertyChanges { target:userSelect; opacity:0; height:0; width:0; x:0; panelHeaderPointsize:1;showList:false;}
                     PropertyChanges { target:powerSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:windowWidth*0.5-(width*.5);showList:true;  }
                     PropertyChanges { target:desktopSelect; opacity:0; height:0; width:0; x:windowWidth; panelHeaderPointsize:1; showList:false;}
                 },
 
                 State {
                     name:"showSession"
-                    PropertyChanges { target:userSelect; opacity:0; height:0; width:0; x:windowWidth ;panelHeaderPointsize:1;showList:false;}
+                    PropertyChanges { target:userSelect; opacity:0; height:0; width:0; x:windowWidth;panelHeaderPointsize:1;showList:false;}
                     PropertyChanges { target:powerSelect; opacity:0; height:0; width:0; x:0; panelHeaderPointsize:1;showList:false;}
-                    PropertyChanges { target:desktopSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:parent.width*0.5-(width*.5);showList:true; }
+                    PropertyChanges { target:desktopSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:parent.width*0.5-(width*.5);showList:true;}
                 }
 
 
@@ -255,7 +255,7 @@ Item{
                 panelColour:backGroundTranspColour
                 panelNavColour:finalGradient
                 panelHeaderColour:panelHeaderColour
-                panelHeaderText:sddm.hostName+": User Login"
+                panelHeaderText:sddm.hostName+":User Login"
                 panelHeaderPointsize:24
                 height:main.windowHeight*0.65
                 width:main.windowWidth*0.5
@@ -263,10 +263,10 @@ Item{
                 anchors.verticalCenter:parent.verticalCenter
                 onGoLeft:options.state = "showSession"
                 onGoRight:options.state = "showPower"
-                loadThis: "Selector.qml"
+                loadThis:"Selector.qml"
                                   modelItem:userModel
                   modelDelegate:UserView{}
-                                listViewOrientation:  1
+                                listViewOrientation: 1
             }
 
             Panel{
@@ -274,7 +274,7 @@ Item{
                 panelColour:backGroundTranspColour
                 panelNavColour:finalGradient
                 panelHeaderColour:panelHeaderColour
-                panelHeaderText:sddm.hostName+" : Desktop Selection"
+                panelHeaderText:sddm.hostName+" :Desktop Selection"
                 panelHeaderPointsize:24
                 height:main.windowHeight*0.65
                 width:main.windowWidth*0.5
@@ -288,7 +288,7 @@ Item{
                 panelColour:backGroundTranspColour
                 panelNavColour:finalGradient
                 panelHeaderColour:panelHeaderColour
-                panelHeaderText: sddm.hostName
+                panelHeaderText:sddm.hostName
                 panelHeaderPointsize:24
                 height:main.windowHeight*0.65
                 width:main.windowWidth*0.5
@@ -296,14 +296,14 @@ Item{
                 anchors.verticalCenter:parent.verticalCenter
                 onGoLeft:options.state = "showUsers"
                 onGoRight:options.state = "showSession"
-                loadThis: "PowerView.qml"
+                loadThis:"PowerView.qml"
 
             }
 
             //            MouseArea{
-            //                anchors.fill: parent
-            //                enabled: true
-            //                onHoveredChanged: {console.log("mouse in options")    }
+            //                anchors.fill:parent
+            //                enabled:true
+            //                onHoveredChanged:{console.log("mouse in options")    }
             //            }
         }
 
