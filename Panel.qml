@@ -97,7 +97,6 @@ FocusScope{
                         active: showList;
                         activeFocusOnTab:showList
                         onLoaded:{
-                            item.activeFocusOnTab=showList;
                             if (modelItem)
                             {
                                 item.model=modelItem;
@@ -110,7 +109,6 @@ FocusScope{
                             {
                                 item.flow=listViewOrientation;
                             }
-//                           forceActiveFocus(item)
                          }
                     }
                 }
