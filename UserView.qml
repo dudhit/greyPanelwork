@@ -27,118 +27,101 @@ Component{
     Rectangle{
         id:root
         readonly property ListView lv:ListView.view
-        color: "#00808080"
-        implicitHeight: lv.height
-        implicitWidth: lv.width
-        GridLayout{
-            id:grid
-            anchors.fill: parent
-            columns: 3
-            rows:4
-            clip: true
-            focus: (lv.currentIndex === index) ? true : false
+        color:"#00808080"
+        implicitHeight:lv.height
+        implicitWidth:lv.width
+       ColumnLayout{
+            id:columnLayout
+            anchors.fill:parent
+            clip:true
+            focus:(lv.currentIndex === index) ? true :false
             Text{
                 id:fullName
-                Layout.row:0
-                Layout.column:0
-                Layout.fillWidth: true
-                color: secondGradient
-                wrapMode: Text.WordWrap
-                minimumPointSize: 70
-                minimumPixelSize: 56
-                text: model.realName
-                //                font.pointSize:20
+                Layout.fillWidth:true
+                color:secondGradient
+                wrapMode:Text.WordWrap
+                minimumPointSize:70
+                minimumPixelSize:56
+                text:model.realName
             }
 
             Image {
-                id: face
-                Layout.row:1
-                Layout.column:0
-                Layout.columnSpan: 3
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                source: model.icon
-                fillMode: Image.Pad
+                id:face
+                Layout.fillWidth:true
+                source:model.icon
+                fillMode:Image.Pad
             }
 
             Text{
                 id:userName
-                Layout.row:2
-                Layout.column:0
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.alignment: Qt.AlignBottom
-                color: secondGradient
-                text: model.name
-                wrapMode: Text.WordWrap
-                //                font.pointSize:20
+                Layout.fillWidth:false
+                Layout.fillHeight:true
+                Layout.alignment:Qt.AlignVCenter
+                color:secondGradient
+                text:model.name
+                wrapMode:Text.WordWrap
             }
 
             Rectangle {
                 id:textHolder
-                Layout.row:3
-                Layout.column:0
-                Layout.columnSpan: 3
-                Layout.fillHeight: true
-                color: firstGradient
-                //                visible: (lv.currentIndex === index) ? true : false
-                Layout.maximumWidth: root.width
-                Layout.minimumHeight: 50
-                Layout.maximumHeight: 108
-                Layout.fillWidth: true
+//                Layout.fillHeight:true
+                color:firstGradient
+                Layout.maximumWidth:0
+                Layout.minimumHeight:50
+                Layout.maximumHeight:108
+                Layout.fillWidth:false
                 TextInput{
                     id:passwordFeild
-                    cursorVisible: true
-                    anchors.fill: textHolder
-                    anchors.margins: 10
-                    color: finalGradient
+                    cursorVisible:true
+                    anchors.fill:textHolder
+                    anchors.margins:10
+                    color:finalGradient
                     focus:true
-                    text:""
+                    text: ""
                     echoMode:TextInput.Password
-                    //                    font.pointSize : 30
-                    Keys.onPressed: (event)=> {
+
+
+                    mouseSelectionMode :TextInput.SelectWords
+
+
+                    passwordCharacter : "*"
+
+
+                    Keys.onPressed:(event)=> {
                                         if (event.key === Qt.Key_Enter ||event.key === Qt.Key_Return)
                                         {
                                             lv.currentIndex=model.index; event.accepted = true;
                                             console.log("pw is:",passwordFeild.text);
                                             console.log("user is:",model.name);
-                                        }
-                                    }
+                                        }}
                 }
-//                onVisibleChanged: {if(visible){opacity=1}else{opacity=0}}
-//                onFocusChanged: {if(activeFocus ===true){forceActiveFocus(passwordFeild);}}
-            }
+                }
+
 
             }
             transitions:Transition {
-                NumberAnimation { properties:"color"; duration:1900; easing.type:Easing.OutInQuart }
+                NumberAnimation { properties:"Height,Width,font.pointSize"; duration:600; easing.type:Easing.InQuart }
             }
             MouseArea{
 
-                anchors.fill: root
-                enabled: true;
-                onClicked: {lv.currentIndex=model.index;
-                    //                forceActiveFocus(passwordFeild);
-                    //                console.log("model index:",model.index);
+                anchors.fill:root
+                enabled:true;
+                onClicked:{lv.currentIndex=model.index;
                 }
-                //        onEntered: {console.log("mouse in")}
-                //        onExited: {console.log("mouse out")}
 
             }
-            //        Component.onCompleted: {console.log("view loaded");}
 
-            states: [
-                State { when: (lv.currentIndex === index)
-                    PropertyChanges {   target: textHolder; color: firstGradient   }
-                    PropertyChanges {   target: userName;  color:  secondGradient  }
-                    PropertyChanges {   target: passwordFeild; color: finalGradient  }
-                    PropertyChanges {   target: passwordFeild; focus: true    }
+            states:[
+                State { when:(lv.currentIndex === index)
+                    PropertyChanges {   target:textHolder; Layout.fillWidth:true;Layout.maximumWidth:root.width; color:firstGradient  }
+                    PropertyChanges {   target:userName; font.pointSize:17;Layout.fillWidth:true ; color:secondGradient  }
+                    PropertyChanges {   target:passwordFeild; focus:true ; font.pointSize:17; color:finalGradient; }
                 },
-                State { when: (lv.currentIndex !== index)
-                    PropertyChanges {   target: textHolder; color: backGroundTranspColour   }
-                    PropertyChanges {   target: userName; color: backGroundTranspColour  }
-                    PropertyChanges {   target: passwordFeild; color: backGroundTranspColour  }
-                }
+                State { when:(lv.currentIndex !== index)
+                    PropertyChanges {   target:textHolder;Layout.fillWidth:false;Layout.maximumWidth:0 ; color:"#00ffffff" }
+                    PropertyChanges {   target:userName; font.pointSize:1;Layout.fillWidth:false;width:0 ; color:"#00ffffff" }
+                    PropertyChanges {   target:passwordFeild;  font.pointSize:1; color:"#00ffffff" }
+                 }
             ]
         }
 
