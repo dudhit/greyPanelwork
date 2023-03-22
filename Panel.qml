@@ -69,16 +69,17 @@ FocusScope{
                 width:panel.width*0.9
                 height:panel.height
                 color:panelColour
-                onActiveFocusChanged:
-                {
-                    if (activeFocus===true)
-                    {forceActiveFocus(panelLoader);}
-                }
+//                onActiveFocusChanged:
+//                {
+//                    if (activeFocus===true)
+//                    {forceActiveFocus(panelLoader);}
+//                }
 
                 Column{
                     spacing:0
                     Text{
                         id:panelHeader
+                        focus: false
                         width:content.width
                         wrapMode:Text.WordWrap
                         text:panelHeaderText
@@ -92,8 +93,12 @@ FocusScope{
                         width:content.width
                         height:content.height-panelHeader.height
                         source:loadThis
-                        KeyNavigation.tab:navRight
-                        KeyNavigation.backtab:navLeft
+//                        KeyNavigation.tab:navRight
+//                        KeyNavigation.backtab:navLeft
+                        //                            KeyNavigation.left:{forceActiveFocus(item)}
+                        //                            KeyNavigation.right:{forceActiveFocus(item)}
+                        //                            KeyNavigation.up:{forceActiveFocus(item)}
+                        //                            KeyNavigation.down:{forceActiveFocus(item)}
                         active: showList;
                         activeFocusOnTab:showList
                         onLoaded:{
