@@ -93,6 +93,7 @@ Component{
                                             lv.currentIndex=model.index; event.accepted = true;
                                             console.log("pw is:",passwordFeild.text);
                                             console.log("user is:",model.name);
+//                                           sddm.login(sessionIndex)
                                         }}
                 }
                 }
@@ -100,10 +101,9 @@ Component{
 
             }
             transitions:Transition {
-                NumberAnimation { properties:"Height,Width,font.pointSize"; duration:600; easing.type:Easing.InQuart }
+                NumberAnimation { properties:"Height,Width,font.pointSize"; duration:400; easing.type:Easing.OutQuart }
             }
             MouseArea{
-
                 anchors.fill:root
                 enabled:true;
                 onClicked:{lv.currentIndex=model.index;
