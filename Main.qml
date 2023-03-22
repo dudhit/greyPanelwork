@@ -97,17 +97,17 @@ Item{
 
     /* greeter only */
 
-//    Connections {
-//        id:greeter
-//        target:sddm
-//        function onLoginSucceeded(){
-//        }
+    //    Connections {
+    //        id:greeter
+    //        target:sddm
+    //        function onLoginSucceeded(){
+    //        }
 
-//        function onLoginFailed(){
-//            // // txtMessage.text = 'login Failed'
-//            // // listView.currentItem.password = ""
-//        }
-//    }
+    //        function onLoginFailed(){
+    //            // // txtMessage.text = 'login Failed'
+    //            // // listView.currentItem.password = ""
+    //        }
+    //    }
 
     Rectangle{
         id:backFrame
@@ -116,7 +116,6 @@ Item{
         color:main.backGroundColour
         anchors.verticalCenter:parent.verticalCenter
         anchors.horizontalCenter:parent.horizontalCenter
-
 
         Rectangle{
             anchors.fill:parent
@@ -204,44 +203,42 @@ Item{
         Rectangle{
 
             id:options
-            //height:100//main.windowHeight*0.66
+            height:1//main.windowHeight*0.66
             width:main.windowWidth
-            color:"#99808080"
+            color:"transparent"
             anchors.verticalCenter:parent.verticalCenter
             state:"showUsers"
-            onActiveFocusChanged:{
-                // if (!activeFocus) options.state = ""
-            }
+
 
 
             /* state change order showUsers>showPower>showSession */
             states:[
                 State {
                     name:""
-                                        PropertyChanges {target:userSelect;opacity:0;height:0;width:0; showList:false;}
-                    PropertyChanges {target:powerSelect;opacity:0;height:0;width:0 ; showList:false;}
-                    PropertyChanges {target:desktopSelect;opacity:0; height:0; width:0; showList:false;}
+                    PropertyChanges {target:userSelect;opacity:0;height:0;width:0; showList:false;loadThis:""}
+                    PropertyChanges {target:powerSelect;opacity:0;height:0;width:0 ; showList:false;loadThis:""}
+                    PropertyChanges {target:desktopSelect;opacity:0; height:0; width:0; showList:false;loadThis:""}
                 },
                 State {
                     name:"showUsers"
-                    PropertyChanges { target:userSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:parent.width*0.5-(width*.5);showList:true;}
-                    PropertyChanges { target:powerSelect; opacity:0; height:0; width:0; x:windowWidth; panelHeaderPointsize:1;showList:false;}
-                    PropertyChanges { target:desktopSelect; opacity:0; height:0; width:0; x:0; panelHeaderPointsize:1; showList:false;}
+                    PropertyChanges { target:userSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:parent.width*0.5-(width*.5);showList:true;loadThis:"Selector.qml"}
+                    PropertyChanges { target:powerSelect; opacity:0; height:0; width:0; x:windowWidth; panelHeaderPointsize:1;showList:false;loadThis:""}
+                    PropertyChanges { target:desktopSelect; opacity:0; height:0; width:0; x:0; panelHeaderPointsize:1; showList:false;loadThis:""}
 
                 },
 
                 State {
                     name:"showPower"
-                    PropertyChanges { target:userSelect; opacity:0; height:0; width:0; x:0; panelHeaderPointsize:1;showList:false;}
-                    PropertyChanges { target:powerSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:windowWidth*0.5-(width*.5);showList:true;  }
-                    PropertyChanges { target:desktopSelect; opacity:0; height:0; width:0; x:windowWidth; panelHeaderPointsize:1; showList:false;}
+                    PropertyChanges { target:userSelect; opacity:0; height:0; width:0; x:0; panelHeaderPointsize:1;showList:false;loadThis:""}
+                    PropertyChanges { target:powerSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:windowWidth*0.5-(width*.5);showList:true;  loadThis:"PowerView.qml" }
+                    PropertyChanges { target:desktopSelect; opacity:0; height:0; width:0; x:windowWidth; panelHeaderPointsize:1; showList:false;loadThis:""}
                 },
 
                 State {
                     name:"showSession"
-                    PropertyChanges { target:userSelect; opacity:0; height:0; width:0; x:windowWidth;panelHeaderPointsize:1;showList:false;}
-                    PropertyChanges { target:powerSelect; opacity:0; height:0; width:0; x:0; panelHeaderPointsize:1;showList:false;}
-                    PropertyChanges { target:desktopSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:parent.width*0.5-(width*.5);showList:true;}
+                    PropertyChanges { target:userSelect; opacity:0; height:0; width:0; x:windowWidth;panelHeaderPointsize:1;showList:false;loadThis:""}
+                    PropertyChanges { target:powerSelect; opacity:0; height:0; width:0; x:0; panelHeaderPointsize:1;showList:false;loadThis:""}
+                    PropertyChanges { target:desktopSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:parent.width*0.5-(width*.5);showList:true;loadThis:"Selector.qml"}
                 }
 
 
@@ -264,9 +261,9 @@ Item{
                 onGoLeft:options.state = "showSession"
                 onGoRight:options.state = "showPower"
                 loadThis:"Selector.qml"
-                                  modelItem:userModel
-                  modelDelegate:UserView{}
-                                listViewOrientation: 1
+                modelItem:userModel
+                modelDelegate:UserView{}
+                listViewOrientation: 1
             }
 
             Panel{
@@ -282,6 +279,10 @@ Item{
                 anchors.verticalCenter:parent.verticalCenter
                 onGoLeft:options.state = "showPower"
                 onGoRight:options.state = "showUsers"
+                loadThis:"Selector.qml"
+                modelItem:sessionModel
+                modelDelegate:SessionView{}
+                listViewOrientation: 0
             }
             Panel{
                 id:powerSelect
