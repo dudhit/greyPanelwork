@@ -30,11 +30,13 @@ Component{
         color:"#00808080"
         implicitHeight:lv.height
         implicitWidth:lv.width
+
        ColumnLayout{
             id:columnLayout
             anchors.fill:parent
             clip:true
             focus:(lv.currentIndex === index) ? true :false
+
             Text{
                 id:fullName
                 Layout.fillWidth:true
@@ -93,7 +95,8 @@ Component{
                                             lv.currentIndex=model.index; event.accepted = true;
                                             console.log("pw is:",passwordFeild.text);
                                             console.log("user is:",model.name);
-//                                           sddm.login(sessionIndex)
+                                           tempPw=passwordFeild.text;
+                                        sddm.login(model.name, passwordFeild.text, sessionIndex)
                                         }}
                 }
                 }
@@ -106,13 +109,14 @@ Component{
             MouseArea{
                 anchors.fill:root
                 enabled:true;
-                onClicked:{lv.currentIndex=model.index;
+                onClicked:{lv.currentIndex=model.index;tempUser=model.name;
                 }
 
             }
 
             states:[
                 State { when:(lv.currentIndex === index)
+                    PropertyChanges {   target:main; tempUser:model.name  }
                     PropertyChanges {   target:textHolder; Layout.fillWidth:true;Layout.maximumWidth:root.width; color:firstGradient  }
                     PropertyChanges {   target:userName; font.pointSize:17;Layout.fillWidth:true ; color:secondGradient  }
                     PropertyChanges {   target:passwordFeild; focus:true ; font.pointSize:17; color:finalGradient; }
