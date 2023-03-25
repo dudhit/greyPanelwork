@@ -25,8 +25,8 @@ import QtQuick.Layouts 1.12
 ***************************************************************************/
 
 
-Item{
-    id:textButton
+FocusScope{
+    id:root
     /*glow button settings*/
     signal action()
     property color textCol:"#ffb0b0b0"
@@ -43,8 +43,7 @@ Item{
 
      GlowButton{  id:customButton
         visible: show
-        focus:true;
-        anchors.fill:parent
+        focus:true;width:root.width;height: root.height
         implicitHeight: 100
         implicitWidth: 100
         buttonColour: buttonCol
