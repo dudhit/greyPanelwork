@@ -84,7 +84,9 @@ Item{
     implicitHeight:/*parent.height*/ 108
     implicitWidth:/*parent.width*/ 192
 
-    property int sessionIndex//:session.index
+    property int sessionIndex:0//:session.index
+    property string tempPw:""
+    property string tempUser:""
     property color backGroundColour:config.backGroundColour
     property color backGroundTranspColour:config.backGroundTranspColour
     property color firstGradient:config.firstGradient
@@ -221,17 +223,17 @@ Item{
                 },
                 State {
                     name:"showUsers"
-                    PropertyChanges { target:userSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:parent.width*0.5-(width*.5);showList:true;loadThis:"Selector.qml"}
                     PropertyChanges { target:powerSelect; opacity:0; height:0; width:0; x:windowWidth; panelHeaderPointsize:1;showList:false;loadThis:""}
                     PropertyChanges { target:desktopSelect; opacity:0; height:0; width:0; x:0; panelHeaderPointsize:1; showList:false;loadThis:""}
+                    PropertyChanges { target:userSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:parent.width*0.5-(width*.5);showList:true;loadThis:"Selector.qml"}
 
                 },
 
                 State {
                     name:"showPower"
                     PropertyChanges { target:userSelect; opacity:0; height:0; width:0; x:0; panelHeaderPointsize:1;showList:false;loadThis:""}
-                    PropertyChanges { target:powerSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:windowWidth*0.5-(width*.5);showList:true;  loadThis:"PowerView.qml" }
                     PropertyChanges { target:desktopSelect; opacity:0; height:0; width:0; x:windowWidth; panelHeaderPointsize:1; showList:false;loadThis:""}
+                    PropertyChanges { target:powerSelect; opacity:1; height:windowHeight*0.65; width:windowWidth*0.5; x:windowWidth*0.5-(width*.5);showList:true;  loadThis:"PowerView.qml" }
                 },
 
                 State {
@@ -299,6 +301,20 @@ Item{
                 onGoRight:options.state = "showSession"
                 loadThis:"PowerView.qml"
 
+            }
+            Rectangle{
+            id:testingOnly
+            x:20;y:20;
+            width:200
+            height: testWho.height+testsess.height+testpass.height
+            Text{id:testsess
+            text: sessionIndex}
+            Text{id:testpass
+                anchors.top:testsess.bottom
+            text: tempPw}
+            Text{id:testWho
+                anchors.top:testpass.bottom
+            text: tempUser}
             }
 
             //            MouseArea{
