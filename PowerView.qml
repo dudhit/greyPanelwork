@@ -22,13 +22,12 @@ import QtQuick.Layouts 1.12
 * OR OTHER DEALINGS IN THE SOFTWARE.
 *
 ***************************************************************************/
-Rectangle{
+FocusScope{
     id:root
     implicitWidth:899
     implicitHeight:800
     anchors.fill:parent
-    focus:false;
-    color:"#00808080"
+//    color:"#00808080"
     property real allBright:1
     property real allDim:0.1
     property color allBkgnd:"#ff000070"
@@ -40,93 +39,60 @@ Rectangle{
     Column{
         clip:true
         anchors.fill:parent
-        focus:false;
         spacing:gap
-        TextGlowButton{id:power;focus:true
+        TextGlowButton{id:power;
             onActiveFocusChanged:{if (activeFocus) {;console.log("power  focus",activeFocus)}}
-            activeFocusOnTab:activeFocus
-
+            activeFocusOnTab:true
             width:parent.width
-            height: parent.height*0.2-gap;
+            height:parent.height*0.2-gap;
             onAction:{sddm.powerOff();console.log("off")}
-                                      KeyNavigation.down:reboot;KeyNavigation.up:sleep;
-              textCol:allText;
-              buttonCol:allBkgnd;
-              highOpacity:allBright;
-              lowOpacity:allDim;
-              show:sddm.canPowerOff;
-            /*text settings*/
-              label:"Power Off";
-              textFont: allTextFont;
-              textSize: allTextSize;
+            KeyNavigation.down:reboot;KeyNavigation.up:sleep;
+            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;show:sddm.canPowerOff;/*text settings*/
+            textCol:allText;label:"Power Off";textFont:allTextFont;textSize:allTextSize;
         }
         TextGlowButton{id:reboot;
             onActiveFocusChanged:{if (activeFocus) ;console.log("reboot focus",activeFocus)}
-            activeFocusOnTab:activeFocus
+//            activeFocusOnTab:activeFocus
             width:parent.width
-            height: parent.height*0.2-gap;
+            height:parent.height*0.2-gap;
             onAction:{sddm.reboot();console.log("reboot")}
-                        KeyNavigation.down:suspend;KeyNavigation.up:power;
-              textCol:allText;
-              buttonCol:allBkgnd;
-              highOpacity:allBright;
-              lowOpacity:allDim;
-              visible:sddm.canReboot;
+            KeyNavigation.down:suspend;KeyNavigation.up:power;
+            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;visible:sddm.canReboot;
             /*text settings*/
-              label:"Reboot";
-              textFont: allTextFont;
-              textSize: allTextSize;
-        }
+            textCol:allText;label:"Reboot";textFont:allTextFont;
+            textSize:allTextSize;}
         TextGlowButton{id:suspend;
             onActiveFocusChanged:{if (activeFocus) ;console.log("suspend  focus",activeFocus)}
-            activeFocusOnTab:activeFocus
+//            activeFocusOnTab:activeFocus
             width:parent.width
-            height: parent.height*0.2-gap;
+            height:parent.height*0.2-gap;
             onAction:{sddm.suspend();console.log("suspend")}
-                        KeyNavigation.down:hibernate;KeyNavigation.up:reboot;
-              textCol:allText;
-              buttonCol:allBkgnd;
-              highOpacity:allBright;
-              lowOpacity:allDim;
-              visible:sddm.canSuspend;
+            KeyNavigation.down:hibernate;KeyNavigation.up:reboot;
+            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;visible:sddm.canSuspend;
             /*text settings*/
-              label:"Suspend";
-              textFont: allTextFont;
-              textSize: allTextSize;
+            textCol:allText;label:"Suspend";textFont:allTextFont;textSize:allTextSize;
         }
         TextGlowButton{id:hibernate;
             onActiveFocusChanged:{if (activeFocus) ;console.log("hibernate  focus",activeFocus)}
-            activeFocusOnTab:activeFocus
+//            activeFocusOnTab:activeFocus
             width:parent.width
-            height: parent.height*0.2-gap;
+            height:parent.height*0.2-gap;
             onAction:{sddm.hibernate();console.log("hibernate")}
-                        KeyNavigation.down:sleep;KeyNavigation.up:suspend;
-              textCol:allText;
-              buttonCol:allBkgnd;
-              highOpacity:allBright;
-              lowOpacity:allDim;
-              visible:sddm.canHibernate;
+            KeyNavigation.down:sleep;KeyNavigation.up:suspend;
+            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;visible:sddm.canHibernate;
             /*text settings*/
-              label:"Hibernate";
-              textFont: allTextFont;
-              textSize: allTextSize;
+            textCol:allText;label:"Hibernate";textFont:allTextFont;textSize:allTextSize;
         }
         TextGlowButton{id:sleep;
             onActiveFocusChanged:{if (activeFocus) ;console.log("sleep  focus",activeFocus)}
-            activeFocusOnTab:activeFocus
+//            activeFocusOnTab:activeFocus
             width:parent.width
-            height: parent.height*0.2-gap;
+            height:parent.height*0.2-gap;
             onAction:{sddm.hybridSleep();console.log("hybridSleep")}
-                        KeyNavigation.down:power;KeyNavigation.up:hibernate;
-              textCol:allText;
-              buttonCol:allBkgnd;
-              highOpacity:allBright;
-              lowOpacity:allDim;
-              visible:sddm.canHybridSleep;
+            KeyNavigation.down:power;KeyNavigation.up:hibernate;
+            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;visible:sddm.canHybridSleep;
             /*text settings*/
-              label:"Hybrid Sleep";
-              textFont: allTextFont;
-              textSize: allTextSize;
+            textCol:allText;label:"Hybrid Sleep";textFont:allTextFont;textSize:allTextSize;
         }
     }
 
