@@ -26,8 +26,9 @@ Component{
     Rectangle{
         id:root
         readonly property ListView lv:ListView.view
-        implicitHeight:sessName.height+sessDesc.height+20
+        implicitHeight:lv.height*.5//sessName.height+sessDesc.height+20
         implicitWidth:lv.width
+        focus: false
         Column{
             anchors.fill:root
             clip:true
@@ -35,18 +36,18 @@ Component{
             Text{
                 id:sessName
                 width:parent.width
-    //            height: parent.height
+                //            height: parent.height
                 wrapMode:Text.WordWrap
                 text:model.name
                 font.pointSize:20
-    //            anchors.top:parent.top
+                //            anchors.top:parent.top
 
             }
             Text{
                 id:sessDesc
                 width:parent.width
                 wrapMode:Text.WordWrap
-    //            anchors.top:t1.bottom
+                //            anchors.top:t1.bottom
                 text:model.comment
                 font.pointSize:20
             }
@@ -55,22 +56,31 @@ Component{
 
 
         MouseArea{
+            id:theMouse
             anchors.fill:root
             enabled:true;
-            onClicked:{lv.currentIndex=model.index;
+            onClicked:{lv.currentIndex=model.index;sessionIndex=model.index;
             }
+        }    transitions:Transition {
+            NumberAnimation { properties:"color"; duration:400; easing.type:Easing.InQuart }
         }
         states:[
             State { when:(lv.currentIndex === index)
-                PropertyChanges {   target:root; color:finalGradient  }
-                PropertyChanges {   target:sessName; color:firstGradient  }
+                PropertyChanges {   target:root; color:firstGradient }
+                PropertyChanges {   target:sessName; color:finalGradient  }
                 PropertyChanges {   target:sessDesc;  color:secondGradient  }
             },
             State { when:(lv.currentIndex !== index)
                 PropertyChanges {   target:root; color:"trasparent"}
                 PropertyChanges {   target:sessName; color:firstGradient  }
                 PropertyChanges {   target:sessDesc; color:firstGradient }
-             }
+            }
         ]
+        Keys.onPressed:(event)=> {
+                           if (event.key === Qt.Key_Space||event.key === Qt.Key_Return)
+                           {
+                           lv.currentIndex=model.index;sessionIndex=model.index;  event.accepted = true;
+                           }
+                       }
     }
 }
