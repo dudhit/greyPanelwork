@@ -45,6 +45,7 @@ Rectangle {
         keyNavigationWraps:true
         anchors.fill:parent
         onModelChanged:{ currentIndex:model.lastIndex}
+        onCurrentItemChanged: {console.log("something changed")}
     }
 
 }
