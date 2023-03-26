@@ -30,7 +30,7 @@ Window{
     id:sddm
     height:760
     width:1080
-    onActiveFocusItemChanged:console.log("activeFocusItem", activeFocusItem)
+    onActiveFocusItemChanged:console.log("activeFocusItem",activeFocusItem, activeFocusItem.focus)
     property bool canPowerOff:true
     property bool canReboot:true
     property bool canSuspend:true
@@ -83,6 +83,7 @@ function suspend(){console.log("your function executed")}
 function reboot(){console.log("your function executed")}
 function hibernate(){console.log("your function executed")}
 function hybridSleep(){console.log("your function executed")}
+function login(){console.log("you did it!")}
 
         Main{ height:sddm.height;width:sddm.width }
     // PowerView{}
