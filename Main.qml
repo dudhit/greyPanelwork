@@ -99,17 +99,18 @@ Item{
 
     /* greeter only */
 
-    //    Connections {
+        Connections {
     //        id:greeter
     //        target:sddm
-    //        function onLoginSucceeded(){
-    //        }
+            function onLoginSucceeded(){
+                testpass.text = 'logging in'
+            }
 
-    //        function onLoginFailed(){
-    //            // // txtMessage.text = 'login Failed'
+            function onLoginFailed(){
+                  testpass.text = 'login Failed'
     //            // // listView.currentItem.password = ""
-    //        }
-    //    }
+            }
+        }
 
     Rectangle{
         id:backFrame

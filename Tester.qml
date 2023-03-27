@@ -83,7 +83,11 @@ function suspend(){console.log("your function executed")}
 function reboot(){console.log("your function executed")}
 function hibernate(){console.log("your function executed")}
 function hybridSleep(){console.log("your function executed")}
-function login(){console.log("you did it!")}
+signal loginSucceeded()
+signal loginFailed()
+function login( name, pw, index){
+    if (name==="dud"&& pw ==="tesT" && index >=0 ) loginSucceeded(); else  loginFailed();
+}//console.log("you did it!")}
 
         Main{ height:sddm.height;width:sddm.width }
     // PowerView{}
