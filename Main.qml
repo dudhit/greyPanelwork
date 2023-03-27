@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
+import SddmComponents 2.0
 /***************************************************************************
 * Copyleft (CC BY-SA 4.0) 2023 Justan O'Strawman  <justanotherstrawman@gmail.com>
 * Permission is hereby granted, free of charge, to any person
@@ -85,14 +86,15 @@ Item{
     implicitWidth:/*parent.width*/ 192
 
     property int sessionIndex:0//:session.index
-    property string tempPw:""
-    property string tempUser:""
+//    property string tempPw:""
+//    property string tempUser:""
     property color backGroundColour:config.backGroundColour
     property color backGroundTranspColour:config.backGroundTranspColour
     property color firstGradient:config.firstGradient
     property color secondGradient:config.secondGradient
     property color finalGradient:config.finalGradient
     property color textColour:config.textColour
+    property string preferredFont:config.preferredFont
     property int windowWidth:main.width
     property int windowHeight:main.height
 
@@ -100,14 +102,14 @@ Item{
     /* greeter only */
 
         Connections {
-    //        id:greeter
-    //        target:sddm
+            id:greeter
+            target:sddm
             function onLoginSucceeded(){
-                testpass.text = 'logging in'
+//                testpass.text = 'logging in'
             }
 
             function onLoginFailed(){
-                  testpass.text = 'login Failed'
+//                  testpass.text = 'login Failed'
     //            // // listView.currentItem.password = ""
             }
         }
@@ -151,7 +153,7 @@ Item{
         Rectangle{
             height:3
             width:parent.width
-            color:"#80808080"
+            color:main.backGroundTranspColour
             AnimatedSprite {
                 anchors.verticalCenter:parent.verticalCenter
                 anchors.fill:parent
@@ -168,7 +170,7 @@ Item{
         }
         Rectangle{
             id:timeStatus
-            color:"#ff0000ff" //main.backGroundColour
+            color:main.backGroundColour
             y:(parent.height*0.10)
             x:0//parent.width*0.5
             // width:0
@@ -179,13 +181,13 @@ Item{
                 id:clockShadow
                 x:2
                 y:2
-                timeFont:"Tahoma"
+                timeFont:preferredFont
                 timeSize:44
                 fontColour:main.firstGradient
             }
             TimeStamp{
                 id:clock
-                timeFont:"Tahoma"
+                timeFont:preferredFont
                 timeSize:44
                 fontColour:main.textColour
             }
@@ -252,10 +254,10 @@ Item{
 
             Panel{
                 id:userSelect
-                panelColour:backGroundTranspColour
-                panelNavColour:finalGradient
+                panelColour:main.backGroundTranspColour
+                panelNavColour:main.finalGradient
                 panelHeaderColour:panelHeaderColour
-                panelHeaderText:sddm.hostName+":User Login"
+                panelHeaderText:"User Login"
                 panelHeaderPointsize:24
                 height:main.windowHeight*0.65
                 width:main.windowWidth*0.5
@@ -271,10 +273,10 @@ Item{
 
             Panel{
                 id:desktopSelect
-                panelColour:backGroundTranspColour
-                panelNavColour:finalGradient
+                panelColour:main.backGroundTranspColour
+                panelNavColour:main.finalGradient
                 panelHeaderColour:panelHeaderColour
-                panelHeaderText:sddm.hostName+" :Desktop Selection"
+                panelHeaderText:"Desktop Selection"
                 panelHeaderPointsize:24
                 height:main.windowHeight*0.65
                 width:main.windowWidth*0.5
@@ -289,10 +291,10 @@ Item{
             }
             Panel{
                 id:powerSelect
-                panelColour:backGroundTranspColour
-                panelNavColour:finalGradient
+                panelColour:main.backGroundTranspColour
+                panelNavColour:main.finalGradient
                 panelHeaderColour:panelHeaderColour
-                panelHeaderText:sddm.hostName
+                panelHeaderText:"Power"
                 panelHeaderPointsize:24
                 height:main.windowHeight*0.65
                 width:main.windowWidth*0.5
@@ -303,20 +305,20 @@ Item{
                 loadThis:"PowerView.qml"
 
             }
-            Rectangle{
-            id:testingOnly
-            x:20;y:20;
-            width:200
-            height: testWho.height+testsess.height+testpass.height
-            Text{id:testsess
-            text: sessionIndex}
-            Text{id:testpass
-                anchors.top:testsess.bottom
-            text: tempPw}
-            Text{id:testWho
-                anchors.top:testpass.bottom
-            text: tempUser}
-            }
+//            Rectangle{
+//            id:testingOnly
+//            x:20;y:20;
+//            width:200
+//            height: testWho.height+testsess.height+testpass.height
+//            Text{id:testsess
+//            text: sessionIndex}
+//            Text{id:testpass
+//                anchors.top:testsess.bottom
+//            text: tempPw}
+//            Text{id:testWho
+//                anchors.top:testpass.bottom
+//            text: tempUser}
+//            }
 
             //            MouseArea{
             //                anchors.fill:parent

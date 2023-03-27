@@ -36,18 +36,15 @@ Component{
             Text{
                 id:sessName
                 width:parent.width
-                //            height: parent.height
                 wrapMode:Text.WordWrap
                 text:model.name
                 font.pointSize:20
-                //            anchors.top:parent.top
 
             }
             Text{
                 id:sessDesc
                 width:parent.width
                 wrapMode:Text.WordWrap
-                //            anchors.top:t1.bottom
                 text:model.comment
                 font.pointSize:20
             }
@@ -66,14 +63,14 @@ Component{
         }
         states:[
             State { when:(lv.currentIndex === index)
-                PropertyChanges {   target:root; color:firstGradient }
-                PropertyChanges {   target:sessName; color:finalGradient  }
-                PropertyChanges {   target:sessDesc;  color:secondGradient  }
+                PropertyChanges {   target:root; color:main.firstGradient }
+                PropertyChanges {   target:sessName; color:main.finalGradient  }
+                PropertyChanges {   target:sessDesc;  color:main.secondGradient  }
             },
             State { when:(lv.currentIndex !== index)
-                PropertyChanges {   target:root; color:"trasparent"}
-                PropertyChanges {   target:sessName; color:firstGradient  }
-                PropertyChanges {   target:sessDesc; color:firstGradient }
+                PropertyChanges {   target:root; color:main.backGroundTranspColour}
+                PropertyChanges {   target:sessName; color:main.firstGradient  }
+                PropertyChanges {   target:sessDesc; color:main.firstGradient }
             }
         ]
         Keys.onPressed:(event)=> {
