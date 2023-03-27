@@ -29,13 +29,14 @@ Item{
     property alias model:listContainer.model
     property alias modelView:listContainer.delegate
     property alias flow:listContainer.orientation
+
     implicitWidth:50
     implicitHeight: 50
     anchors.fill:parent
-Rectangle {
-    color:"#00808080"
+//Rectangle {
+//    color:"#00808080"
 
-    anchors.fill:parent
+//    anchors.fill:parent
     ListView{
         id:listContainer
         clip:true
@@ -46,9 +47,9 @@ Rectangle {
         anchors.fill:parent
         onModelChanged:{ currentIndex:model.lastIndex}
         onCurrentItemChanged: {console.log("something changed")}
-    }
+     }
 
-}
+//}
 }
 
 
