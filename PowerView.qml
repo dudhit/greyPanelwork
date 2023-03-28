@@ -41,56 +41,59 @@ FocusScope{
         anchors.fill:parent
         spacing:gap
         TextGlowButton{id:power;
-            onActiveFocusChanged:{if (activeFocus) {;console.log("power  focus",activeFocus)}}
+//            onActiveFocusChanged:{if (activeFocus) {;console.log("power  focus",activeFocus)}}
             activeFocusOnTab:true
             width:parent.width
             height:parent.height*0.2-gap;
-            onAction:{sddm.powerOff();console.log("off")}
+            onAction:{sddm.powerOff();/*console.log("off")*/}
             KeyNavigation.down:reboot;KeyNavigation.up:sleep;
-            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;show:sddm.canPowerOff;/*text settings*/
+            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;
+//            show:sddm.canPowerOff;/*text settings*/
             textCol:allText;label:"Power Off";textFont:allTextFont;textSize:allTextSize;
         }
         TextGlowButton{id:reboot;
-            onActiveFocusChanged:{if (activeFocus) ;console.log("reboot focus",activeFocus)}
+//            onActiveFocusChanged:{if (activeFocus) ;console.log("reboot focus",activeFocus)}
 //            activeFocusOnTab:activeFocus
             width:parent.width
             height:parent.height*0.2-gap;
-            onAction:{sddm.reboot();console.log("reboot")}
+            onAction:{sddm.reboot();/*console.log("reboot")*/}
             KeyNavigation.down:suspend;KeyNavigation.up:power;
-            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;visible:sddm.canReboot;
+            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;/*show:sddm.canReboot;*/
             /*text settings*/
             textCol:allText;label:"Reboot";textFont:allTextFont;
             textSize:allTextSize;}
         TextGlowButton{id:suspend;
-            onActiveFocusChanged:{if (activeFocus) ;console.log("suspend  focus",activeFocus)}
+//            onActiveFocusChanged:{if (activeFocus) ;console.log("suspend  focus",activeFocus)}
 //            activeFocusOnTab:activeFocus
             width:parent.width
             height:parent.height*0.2-gap;
-            onAction:{sddm.suspend();console.log("suspend")}
+            onAction:{sddm.suspend();/*console.log("suspend")*/}
             KeyNavigation.down:hibernate;KeyNavigation.up:reboot;
-            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;visible:sddm.canSuspend;
+            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;/*show:sddm.canSuspend;*/
             /*text settings*/
             textCol:allText;label:"Suspend";textFont:allTextFont;textSize:allTextSize;
         }
         TextGlowButton{id:hibernate;
-            onActiveFocusChanged:{if (activeFocus) ;console.log("hibernate  focus",activeFocus)}
+//            onActiveFocusChanged:{if (activeFocus) ;console.log("hibernate  focus",activeFocus)}
 //            activeFocusOnTab:activeFocus
             width:parent.width
             height:parent.height*0.2-gap;
-            onAction:{sddm.hibernate();console.log("hibernate")}
+            onAction:{sddm.hibernate();/*console.log("hibernate")*/}
             KeyNavigation.down:sleep;KeyNavigation.up:suspend;
-            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;visible:sddm.canHibernate;
+            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;
+//            show:sddm.canHibernate;
             /*text settings*/
             textCol:allText;label:"Hibernate";textFont:allTextFont;textSize:allTextSize;
         }
         TextGlowButton{id:sleep;
-            onActiveFocusChanged:{if (activeFocus) ;console.log("sleep  focus",activeFocus)}
+//            onActiveFocusChanged:{if (activeFocus) ;console.log("sleep  focus",activeFocus)}
 //            activeFocusOnTab:activeFocus
             width:parent.width
             height:parent.height*0.2-gap;
-            onAction:{sddm.hybridSleep();console.log("hybridSleep")}
+            onAction:{sddm.hybridSleep();/*console.log("hybridSleep")*/}
             KeyNavigation.down:power;KeyNavigation.up:hibernate;
-            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;visible:sddm.canHybridSleep;
+            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;
+//            show:sddm.canHybridSleep;
             /*text settings*/
             textCol:allText;label:"Hybrid Sleep";textFont:allTextFont;textSize:allTextSize;
         }

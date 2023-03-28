@@ -76,13 +76,14 @@ Window{
         property color secondGradient:"#ffc0c0c0"
         property color finalGradient:"#ffeeeeee"
         property color textColour:"#ff000000"
+         property string preferredFont:"Tahoma"
     }
 
-function powerOff(){console.log("your function executed")}
-function suspend(){console.log("your function executed")}
-function reboot(){console.log("your function executed")}
-function hibernate(){console.log("your function executed")}
-function hybridSleep(){console.log("your function executed")}
+function powerOff(){console.log("powerOff function executed")}
+function suspend(){console.log("suspend function executed")}
+function reboot(){console.log("reboot function executed")}
+function hibernate(){console.log("hibernate function executed")}
+function hybridSleep(){console.log("hybridSleep function executed")}
 signal loginSucceeded()
 signal loginFailed()
 function login( name, pw, index){

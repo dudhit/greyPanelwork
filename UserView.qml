@@ -27,7 +27,7 @@ Component{
     Rectangle{
         id:root
         readonly property ListView lv:ListView.view
-        color:"#00808080"
+        color:backGroundTranspColour
         implicitHeight:lv.height
         implicitWidth:lv.width
 
@@ -93,10 +93,11 @@ Component{
                                         if (event.key === Qt.Key_Enter ||event.key === Qt.Key_Return)
                                         {
                                             lv.currentIndex=model.index; event.accepted = true;
-                                            console.log("pw is:",passwordFeild.text);
-                                            console.log("user is:",model.name);
-                                           tempPw=passwordFeild.text;
+//                                            console.log("pw is:",passwordFeild.text);
+//                                            console.log("user is:",model.name);
+//                                           tempPw=passwordFeild.text;
                                         sddm.login(model.name, passwordFeild.text, sessionIndex)
+                                           root.visible=false
                                         }}
                 }
                 }
@@ -122,9 +123,9 @@ Component{
                     PropertyChanges {   target:passwordFeild; focus:true ; font.pointSize:17; color:finalGradient; }
                 },
                 State { when:(lv.currentIndex !== index)
-                    PropertyChanges {   target:textHolder;Layout.fillWidth:false;Layout.maximumWidth:0 ; color:"#00ffffff" }
-                    PropertyChanges {   target:userName; font.pointSize:1;Layout.fillWidth:false;width:0 ; color:"#00ffffff" }
-                    PropertyChanges {   target:passwordFeild;  font.pointSize:1; color:"#00ffffff" }
+                    PropertyChanges {   target:textHolder;Layout.fillWidth:false;Layout.maximumWidth:0 ; color:backGroundTranspColour }
+                    PropertyChanges {   target:userName; font.pointSize:1;Layout.fillWidth:false;width:0 ; color:backGroundTranspColour }
+                    PropertyChanges {   target:passwordFeild;  font.pointSize:1; color:backGroundTranspColour }
                  }
             ]
         }

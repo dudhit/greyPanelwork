@@ -33,7 +33,7 @@ FocusScope{
     property string panelHeaderText:"Default header"
     property int panelHeaderPointsize:24
     property string panelFont:"Tahoma"
-    property ListModel modelItem
+    property var modelItem
     property Component modelDelegate
     property int listViewOrientation
     property bool showList:false
