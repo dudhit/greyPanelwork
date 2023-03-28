@@ -1,7 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
-import SddmComponents 2.0
 /***************************************************************************
 * Copyleft (CC BY-SA 4.0) 2023 Justan O'Strawman  <justanotherstrawman@gmail.com>
 * Permission is hereby granted, free of charge, to any person
@@ -26,68 +25,13 @@ import SddmComponents 2.0
 ***************************************************************************/
 
 
-/* greeter only */
-//import SddmComponents 2.0
-/* qt creator only */
-//import "SddmComponents" as SddmComponents
-
-/*sddm access
-https://github.com/sddm/sddm/blob/develop/docs/THEMING.md
-Properties
-
-hostName:Holds the name of the host computer.
-
-canPowerOff:true, if we can power off the machine; false, otherwise
-
-canReboot:true, if we can reboot the machine; false, otherwise
-
-canSuspend:true, if the machine supports suspending to the memory; false, otherwise
-
-canHibernate:true, if the machine supports hibernating, e.g suspending to the disk; false, otherwise
-
-canHybridSleep:true, if the machine supports hybrid sleep, e.g suspending to both memory and disk; false, otherwise
-Methods
-
-powerOff():Powers of the machine.
-
-reboot():Reboots the machine.
-
-suspend():Suspends the machine to the memory.
-
-hibernate():Suspends the machine to the disk.
-
-hybridSleep():Suspends the machine both to the memory and the disk.
-
-login(user, password, sessionIndex):Attempts to login as the user, using the password into the session pointed by the sessionIndex. Either the loginFailed or the loginSucceeded signal will be emitted depending on whether the operation is successful or not.
-Signals
-
-loginFailed():Emitted when a requested login operation fails.
-
-loginSucceeded():Emitted when a requested login operation succeeds.
-screenModel:
- provides:name , geometry ,primary
-
-sessionModel:
- provides:file, name, exec , comment , lastIndex
-
-userModel:
- provides name, realName, homeDir , icon , lastIndex , lastUser
-
-*sddm locale selection sessionModel modelItem.modelData.shortName
-*sddm.login(model.name, password, sessionIndex);
-*error text __sddm_errors
-
-*/
 Item{
     id:main
     visible:true
-    //sddm will force full screen but scrolling clock is static without a size
-    implicitHeight:/*parent.height*/ 108
-    implicitWidth:/*parent.width*/ 192
+    implicitHeight: 108
+    implicitWidth:192
 
-    property int sessionIndex:0//:session.index
-//    property string tempPw:""
-//    property string tempUser:""
+    property int sessionIndex:0
     property color backGroundColour:config.backGroundColour
     property color backGroundTranspColour:config.backGroundTranspColour
     property color firstGradient:config.firstGradient
@@ -98,21 +42,15 @@ Item{
     property int windowWidth:main.width
     property int windowHeight:main.height
 
-
-    /* greeter only */
-
-        Connections {
-            id:greeter
-            target:sddm
-            function onLoginSucceeded(){
-//                testpass.text = 'logging in'
-            }
-
-            function onLoginFailed(){
-//                  testpass.text = 'login Failed'
-    //            // // listView.currentItem.password = ""
-            }
+    Connections {
+        id:greeter
+        target:sddm
+        function onLoginSucceeded(){
         }
+
+        function onLoginFailed(){
+        }
+    }
 
     Rectangle{
         id:backFrame
@@ -134,8 +72,6 @@ Item{
                 GradientStop { position:1.0; color:main.backGroundColour }
             }
 
-            // onStatusChanged:{
-            // }
             MouseArea {
                 anchors.fill:parent
                 cursorShape:Qt.CrossCursor
@@ -148,7 +84,7 @@ Item{
             }
 
         }
-        // Item {
+
 
         Rectangle{
             height:3
@@ -172,10 +108,7 @@ Item{
             id:timeStatus
             color:main.backGroundColour
             y:(parent.height*0.10)
-            x:0//parent.width*0.5
-            // width:0
-            // height:0 //(parent.height/4)*3
-            //focus:true
+            x:0
             activeFocusOnTab:false
             TimeStamp{
                 id:clockShadow
@@ -208,7 +141,7 @@ Item{
         Rectangle{
 
             id:options
-            height:1//main.windowHeight*0.66
+            height:1
             width:main.windowWidth
             color:"transparent"
             anchors.verticalCenter:parent.verticalCenter
@@ -303,37 +236,7 @@ Item{
                 onGoLeft:options.state = "showUsers"
                 onGoRight:options.state = "showSession"
                 loadThis:"PowerView.qml"
-
             }
-//            Rectangle{
-//            id:testingOnly
-//            x:20;y:20;
-//            width:200
-//            height: testWho.height+testsess.height+testpass.height
-//            Text{id:testsess
-//            text: sessionIndex}
-//            Text{id:testpass
-//                anchors.top:testsess.bottom
-//            text: tempPw}
-//            Text{id:testWho
-//                anchors.top:testpass.bottom
-//            text: tempUser}
-//            }
-
-            //            MouseArea{
-            //                anchors.fill:parent
-            //                enabled:true
-            //                onHoveredChanged:{console.log("mouse in options")    }
-            //            }
         }
-
-
     }
 }
-
-
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:0.75}
-}
-##^##*/

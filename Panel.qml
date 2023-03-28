@@ -85,16 +85,11 @@ FocusScope{
                     }
                     Loader{
                         id:panelLoader
-//                        onActiveFocusChanged:{if(activeFocus)
-//                            {console.log("loader", activeFocus);
-//                                item.focus=true}
-//                        }
                         width:content.width
                         height:content.height-panelHeader.height
                         source:loadThis
                         KeyNavigation.tab:navRight
                         KeyNavigation.backtab:navLeft
-                        //                        KeyNavigation.down: panelLoader.item
                         active: showList;
                         activeFocusOnTab:showList
                         onLoaded:{
@@ -125,9 +120,7 @@ FocusScope{
                 KeyNavigation.backtab:panelLoader
                 onSelectNav:{goRight();}
             }
-
         }
-
     }
 }
 

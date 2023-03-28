@@ -26,7 +26,7 @@ Component{
     Rectangle{
         id:root
         readonly property ListView lv:ListView.view
-        implicitHeight:lv.height*.5//sessName.height+sessDesc.height+20
+        implicitHeight:lv.height*.5
         implicitWidth:lv.width
         focus: false
         Column{
@@ -39,7 +39,6 @@ Component{
                 wrapMode:Text.WordWrap
                 text:model.name
                 font.pointSize:20
-
             }
             Text{
                 id:sessDesc
@@ -49,9 +48,6 @@ Component{
                 font.pointSize:20
             }
         }
-
-
-
         MouseArea{
             id:theMouse
             anchors.fill:root
@@ -76,7 +72,7 @@ Component{
         Keys.onPressed:(event)=> {
                            if (event.key === Qt.Key_Space||event.key === Qt.Key_Return)
                            {
-                           lv.currentIndex=model.index;sessionIndex=model.index;  event.accepted = true;
+                               lv.currentIndex=model.index;sessionIndex=model.index;  event.accepted = true;
                            }
                        }
     }

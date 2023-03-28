@@ -31,7 +31,7 @@ Component{
         implicitHeight:lv.height
         implicitWidth:lv.width
 
-       ColumnLayout{
+        ColumnLayout{
             id:columnLayout
             anchors.fill:parent
             clip:true
@@ -66,7 +66,6 @@ Component{
 
             Rectangle {
                 id:textHolder
-//                Layout.fillHeight:true
                 color:firstGradient
                 Layout.maximumWidth:0
                 Layout.minimumHeight:50
@@ -81,62 +80,44 @@ Component{
                     focus:true
                     text: ""
                     echoMode:TextInput.Password
-
-
                     mouseSelectionMode :TextInput.SelectWords
-
-
                     passwordCharacter : "*"
-
-
                     Keys.onPressed:(event)=> {
-                                        if (event.key === Qt.Key_Enter ||event.key === Qt.Key_Return)
-                                        {
-                                            lv.currentIndex=model.index; event.accepted = true;
-//                                            console.log("pw is:",passwordFeild.text);
-//                                            console.log("user is:",model.name);
-//                                           tempPw=passwordFeild.text;
-                                        sddm.login(model.name, passwordFeild.text, sessionIndex)
+                                       if (event.key === Qt.Key_Enter ||event.key === Qt.Key_Return)
+                                       {
+                                           lv.currentIndex=model.index; event.accepted = true;
+                                           sddm.login(model.name, passwordFeild.text, sessionIndex)
                                            root.visible=false
-                                        }}
+                                       }}
                 }
-                }
-
-
-            }
-            transitions:Transition {
-                NumberAnimation { properties:"Height,Width,font.pointSize"; duration:400; easing.type:Easing.OutQuart }
-            }
-            MouseArea{
-                anchors.fill:root
-                enabled:true;
-                onClicked:{lv.currentIndex=model.index;tempUser=model.name;
-                }
-
             }
 
-            states:[
-                State { when:(lv.currentIndex === index)
-                    PropertyChanges {   target:main; tempUser:model.name  }
-                    PropertyChanges {   target:textHolder; Layout.fillWidth:true;Layout.maximumWidth:root.width; color:firstGradient  }
-                    PropertyChanges {   target:userName; font.pointSize:17;Layout.fillWidth:true ; color:secondGradient  }
-                    PropertyChanges {   target:passwordFeild; focus:true ; font.pointSize:17; color:finalGradient; }
-                },
-                State { when:(lv.currentIndex !== index)
-                    PropertyChanges {   target:textHolder;Layout.fillWidth:false;Layout.maximumWidth:0 ; color:backGroundTranspColour }
-                    PropertyChanges {   target:userName; font.pointSize:1;Layout.fillWidth:false;width:0 ; color:backGroundTranspColour }
-                    PropertyChanges {   target:passwordFeild;  font.pointSize:1; color:backGroundTranspColour }
-                 }
-            ]
+
+        }
+        transitions:Transition {
+            NumberAnimation { properties:"Height,Width,font.pointSize"; duration:400; easing.type:Easing.OutQuart }
+        }
+        MouseArea{
+            anchors.fill:root
+            enabled:true;
+            onClicked:{lv.currentIndex=model.index;tempUser=model.name;
+            }
+
         }
 
+        states:[
+            State { when:(lv.currentIndex === index)
+                PropertyChanges {   target:main; tempUser:model.name  }
+                PropertyChanges {   target:textHolder; Layout.fillWidth:true;Layout.maximumWidth:root.width; color:firstGradient  }
+                PropertyChanges {   target:userName; font.pointSize:17;Layout.fillWidth:true ; color:secondGradient  }
+                PropertyChanges {   target:passwordFeild; focus:true ; font.pointSize:17; color:finalGradient; }
+            },
+            State { when:(lv.currentIndex !== index)
+                PropertyChanges {   target:textHolder;Layout.fillWidth:false;Layout.maximumWidth:0 ; color:backGroundTranspColour }
+                PropertyChanges {   target:userName; font.pointSize:1;Layout.fillWidth:false;width:0 ; color:backGroundTranspColour }
+                PropertyChanges {   target:passwordFeild;  font.pointSize:1; color:backGroundTranspColour }
+            }
+        ]
     }
 
-
-
-
-    /*##^##
-Designer {
- D{i:0;autoSize:true;formeditorZoom:0.75;height:480;width:640}
 }
-##^##*/

@@ -1,6 +1,5 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
-//import QtQuick.Controls 2.12
 /***************************************************************************
 * Copyleft (CC BY-SA 4.0) 2023 Justan O'Strawman  <justanotherstrawman@gmail.com>
 * Permission is hereby granted, free of charge, to any person
@@ -39,9 +38,7 @@ FocusScope{
     property string textFont: "Tahoma"
     property int textSize: 30
 
-//    color: "#00ffffff"
-
-     GlowButton{  id:customButton
+    GlowButton{  id:customButton
         visible: show
         focus:true;width:root.width;height: root.height
         implicitHeight: 100
@@ -51,18 +48,18 @@ FocusScope{
         navDim:lowOpacity
         onSelectNav: {action()}
         Text{
-         id:customtext
-         color: textCol
-         text:label
-         focus: false
-         wrapMode: Text.WordWrap
-         minimumPointSize: 70
-         minimumPixelSize: 20
-         font.pointSize:textSize
-         horizontalAlignment : Text.AlignHCenter
-         verticalAlignment : Text.AlignVCenter
-         font.family: textFont
-         anchors.fill:parent
-     }
-}
+            id:customtext
+            color: textCol
+            text:label
+            focus: false
+            wrapMode: Text.WordWrap
+            minimumPointSize: 70
+            minimumPixelSize: 20
+            font.pointSize:textSize
+            horizontalAlignment : Text.AlignHCenter
+            verticalAlignment : Text.AlignVCenter
+            font.family: textFont
+            anchors.fill:parent
+        }
+    }
 }

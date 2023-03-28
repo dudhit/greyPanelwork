@@ -33,10 +33,6 @@ Item{
     implicitWidth:50
     implicitHeight: 50
     anchors.fill:parent
-//Rectangle {
-//    color:"#00808080"
-
-//    anchors.fill:parent
     ListView{
         id:listContainer
         clip:true
@@ -46,14 +42,5 @@ Item{
         keyNavigationWraps:true
         anchors.fill:parent
         onModelChanged:{ currentIndex:model.lastIndex}
-     }
-
-//}
+    }
 }
-
-
-/*##^##
-Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
-##^##*/

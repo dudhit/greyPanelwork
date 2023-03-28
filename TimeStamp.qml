@@ -40,13 +40,10 @@ Item {
 
     Text {
         id: time
-        // anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.Top
         color: container.fontColour
         font.family: timeFont
         text : Qt.formatTime(container.dateTime, "hh:mm")+' '+Qt.formatDate(container.dateTime, Qt.DefaultLocaleLongDate)
         font.pointSize: timeSize
     }
-
-
 }
