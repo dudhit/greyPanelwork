@@ -87,7 +87,6 @@ Component{
                                        {
                                            lv.currentIndex=model.index; event.accepted = true;
                                            sddm.login(model.name, passwordFeild.text, sessionIndex)
-                                           root.visible=false
                                        }}
                 }
             }
