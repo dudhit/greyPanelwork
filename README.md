@@ -1,5 +1,5 @@
 An SDDM-greeter theme
-hope fully it doesn't look like half the clones @ the store.kde.orf
+hope fully it doesn't look like half the clones @ the store.kde.org
 
 after 3 years i was getting a bit bored of debian-maui
 this is my first dive into qml while also trying not to rely on SddmComponents
