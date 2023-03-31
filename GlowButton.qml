@@ -26,7 +26,8 @@ FocusScope {
     id: root
     property real navBright : 0.5
     property real navDim : 0.1
-    property alias buttonColour:glowButton.color
+    property alias buttonColour:glowButton.color    
+    property int aniSpeed:5000
     signal selectNav()
     signal hoverNav()
     signal unHoverNav()
@@ -90,7 +91,7 @@ FocusScope {
                 properties: "opacity"
                 from:  navBright
                 to:navDim
-                duration: 2500
+                duration: aniSpeed
             }
 
             NumberAnimation{
@@ -99,7 +100,7 @@ FocusScope {
                 properties: "opacity"
                 from:  navDim
                 to:navBright
-                duration: 5000
+                duration: aniSpeed
             }
 
 
