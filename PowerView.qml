@@ -28,12 +28,13 @@ FocusScope{
     implicitHeight:800
     anchors.fill:parent
 //    color:"#00808080"
-    property real allBright:1
-    property real allDim:0.1
-    property color allBkgnd:"#ff000070"
-    property color allText:"#ff707070"
-    property string allTextFont:"Tahoma"
-    property int allTextSize:24
+    property real allBright:main.buttonMaxOpacity
+    property real allDim:main.buttonMinOpacity
+    property color allBkgnd:main.firstGradient
+    property color allText:main.textColour
+    property string allTextFont:main.preferredFont
+    property int allTextSize:main.panelHeaderSize
+    property int allanim:main.buttonAffectSpeed
     property int gap:20
 
     Column{
@@ -47,7 +48,7 @@ FocusScope{
             height:parent.height*0.2-gap;
             onAction:{sddm.powerOff();/*console.log("off")*/}
             KeyNavigation.down:reboot;KeyNavigation.up:sleep;
-            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;
+            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;fadeSpeed:allanim;
 //            show:sddm.canPowerOff;/*text settings*/
             textCol:allText;label:"Power Off";textFont:allTextFont;textSize:allTextSize;
         }
@@ -58,7 +59,7 @@ FocusScope{
             height:parent.height*0.2-gap;
             onAction:{sddm.reboot();/*console.log("reboot")*/}
             KeyNavigation.down:suspend;KeyNavigation.up:power;
-            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;/*show:sddm.canReboot;*/
+            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;fadeSpeed:allanim;/*show:sddm.canReboot;*/
             /*text settings*/
             textCol:allText;label:"Reboot";textFont:allTextFont;
             textSize:allTextSize;}
@@ -69,7 +70,7 @@ FocusScope{
             height:parent.height*0.2-gap;
             onAction:{sddm.suspend();/*console.log("suspend")*/}
             KeyNavigation.down:hibernate;KeyNavigation.up:reboot;
-            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;/*show:sddm.canSuspend;*/
+            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;fadeSpeed:allanim;/*show:sddm.canSuspend;*/
             /*text settings*/
             textCol:allText;label:"Suspend";textFont:allTextFont;textSize:allTextSize;
         }
@@ -80,7 +81,7 @@ FocusScope{
             height:parent.height*0.2-gap;
             onAction:{sddm.hibernate();/*console.log("hibernate")*/}
             KeyNavigation.down:sleep;KeyNavigation.up:suspend;
-            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;
+            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;fadeSpeed:allanim;
 //            show:sddm.canHibernate;
             /*text settings*/
             textCol:allText;label:"Hibernate";textFont:allTextFont;textSize:allTextSize;
@@ -92,7 +93,7 @@ FocusScope{
             height:parent.height*0.2-gap;
             onAction:{sddm.hybridSleep();/*console.log("hybridSleep")*/}
             KeyNavigation.down:power;KeyNavigation.up:hibernate;
-            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;
+            buttonCol:allBkgnd;highOpacity:allBright;lowOpacity:allDim;fadeSpeed:allanim;
 //            show:sddm.canHybridSleep;
             /*text settings*/
             textCol:allText;label:"Hybrid Sleep";textFont:allTextFont;textSize:allTextSize;
