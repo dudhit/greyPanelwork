@@ -94,7 +94,15 @@ Item{
     property color secondGradient:config.secondGradient
     property color finalGradient:config.finalGradient
     property color textColour:config.textColour
+    property color dateTextColour:config.dateTextColour
+    property color dateTextShadow:config.dateTextShadow
     property string preferredFont:config.preferredFont
+    property int panelHeaderSize:config.panelHeaderSize
+    property int generalTextSize:config.generalTextSize
+    property int buttonAffectSpeed:config.buttonAffectSpeed
+    property real buttonMaxOpacity:config.buttonMaxOpacity
+    property real buttonMinOpacity:config.buttonMinOpacity
+    property int dateSize:config.dateSize
     property int windowWidth:main.width
     property int windowHeight:main.height
 
@@ -170,7 +178,7 @@ Item{
         }
         Rectangle{
             id:timeStatus
-            color:main.backGroundColour
+            color:main.backGroundTranspColour
             y:(parent.height*0.10)
             x:0//parent.width*0.5
             // width:0
@@ -181,15 +189,15 @@ Item{
                 id:clockShadow
                 x:2
                 y:2
-                timeFont:preferredFont
-                timeSize:44
-                fontColour:main.firstGradient
+                timeFont:main.preferredFont
+                timeSize:main.dateSize
+                fontColour:main.dateTextShadow
             }
             TimeStamp{
                 id:clock
-                timeFont:preferredFont
-                timeSize:44
-                fontColour:main.textColour
+                timeFont:main.preferredFont
+                timeSize:main.dateSize
+                fontColour:main.dateTextColour
             }
 
 
@@ -256,9 +264,9 @@ Item{
                 id:userSelect
                 panelColour:main.backGroundTranspColour
                 panelNavColour:main.finalGradient
-                panelHeaderColour:panelHeaderColour
+                panelHeaderColour:main.textColour
                 panelHeaderText:"User Login"
-                panelHeaderPointsize:24
+                panelHeaderPointsize:main.panelHeaderSize
                 height:main.windowHeight*0.65
                 width:main.windowWidth*0.5
                 x:windowWidth*0.5-(width*.5)
@@ -275,9 +283,9 @@ Item{
                 id:desktopSelect
                 panelColour:main.backGroundTranspColour
                 panelNavColour:main.finalGradient
-                panelHeaderColour:panelHeaderColour
+                panelHeaderColour:main.textColour
                 panelHeaderText:"Desktop Selection"
-                panelHeaderPointsize:24
+                panelHeaderPointsize:main.panelHeaderSize
                 height:main.windowHeight*0.65
                 width:main.windowWidth*0.5
                 x:windowWidth*0.5-(width*.5)
@@ -293,9 +301,9 @@ Item{
                 id:powerSelect
                 panelColour:main.backGroundTranspColour
                 panelNavColour:main.finalGradient
-                panelHeaderColour:panelHeaderColour
+                panelHeaderColour:main.textColour
                 panelHeaderText:"Power"
-                panelHeaderPointsize:24
+                panelHeaderPointsize:main.panelHeaderSize
                 height:main.windowHeight*0.65
                 width:main.windowWidth*0.5
                 x:windowWidth*0.5-(width*.5)

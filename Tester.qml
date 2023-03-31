@@ -44,6 +44,19 @@ Window{
     property color secondGradient:config.secondGradient
     property color finalGradient:config.finalGradient
     property color textColour:config.textColour
+
+
+   property color   dateTextColour:config.dateTextColour
+   property color   dateTextShadow:config.dateTextShadow
+   property string  preferredFont:config.preferredFont
+   property int  dateSize:config.dateSize
+   property int  panelHeaderSize:config.panelHeaderSize
+   property int  generalTextSize:config.generalTextSize
+   property real  buttonMaxOpacity:config.buttonMaxOpacity
+   property real  buttonMinOpacity:config.buttonMinOpacity
+   property int  buttonAffectSpeed:config.buttonAffectSpeed
+
+
     property int windowWidth:sddm.width
     property int windowHeight:sddm.height
     ListModel {
@@ -75,22 +88,31 @@ Window{
         property color firstGradient:"#ff404040"
         property color secondGradient:"#ffc0c0c0"
         property color finalGradient:"#ffeeeeee"
-        property color textColour:"#ff000000"
-         property string preferredFont:"Tahoma"
+        property color textColour:"#eeeeeeee"
+        property string preferredFont:"Tahoma"
+        property color dateTextColour:"#ff000000"
+        property color dateTextShadow:"#ff808080"
+        property int dateSize:44
+        property int panelHeaderSize:24
+        property int generalTextSize:20
+        property real buttonMaxOpacity:0.5
+        property real buttonMinOpacity:0.1
+        property int  buttonAffectSpeed:5000
+
     }
 
-function powerOff(){console.log("powerOff function executed")}
-function suspend(){console.log("suspend function executed")}
-function reboot(){console.log("reboot function executed")}
-function hibernate(){console.log("hibernate function executed")}
-function hybridSleep(){console.log("hybridSleep function executed")}
-signal loginSucceeded()
-signal loginFailed()
-function login( name, pw, index){
-    if (name==="dud"&& pw ==="tesT" && index >=0 ) loginSucceeded(); else  loginFailed();
-}//console.log("you did it!")}
+    function powerOff(){console.log("powerOff function executed")}
+    function suspend(){console.log("suspend function executed")}
+    function reboot(){console.log("reboot function executed")}
+    function hibernate(){console.log("hibernate function executed")}
+    function hybridSleep(){console.log("hybridSleep function executed")}
+    signal loginSucceeded()
+    signal loginFailed()
+    function login( name, pw, index){
+        if (name==="dud"&& pw ==="tesT" && index >=0 ) loginSucceeded(); else  loginFailed();
+    }//console.log("you did it!")}
 
-        Main{ height:sddm.height;width:sddm.width }
+    Main{ height:sddm.height;width:sddm.width }
     // PowerView{}
-//    Selector{        model:userModel;   modelView:UserView{};   flow:ListView.Horizontal    }
+    //    Selector{        model:userModel;   modelView:UserView{};   flow:ListView.Horizontal    }
 }
