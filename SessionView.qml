@@ -26,9 +26,11 @@ Component{
     Rectangle{
         id:root
         readonly property ListView lv:ListView.view
-        implicitHeight:lv.height*.5//sessName.height+sessDesc.height+20
+        color:main.backGroundTranspColour
+        implicitHeight:20+sessName.height+sessDesc.height//lv.height*.5//sessName.height+sessDesc.height+20
         implicitWidth:lv.width
         focus: false
+        radius:width*0.25
         Column{
             anchors.fill:root
             clip:true
@@ -36,17 +38,25 @@ Component{
             Text{
                 id:sessName
                 width:parent.width
+                horizontalAlignment:  Text.AlignHCenter
+                verticalAlignment:  Text.AlignVCenter
                 wrapMode:Text.WordWrap
                 text:model.name
-                font.pointSize:20
+                color:main.firstGradient
+                font.pointSize:main.generalTextSize
+                font.family:main.preferredFont
 
             }
             Text{
                 id:sessDesc
                 width:parent.width
+                horizontalAlignment:  Text.AlignHCenter
+                verticalAlignment:  Text.AlignVCenter
                 wrapMode:Text.WordWrap
                 text:model.comment
-                font.pointSize:20
+                color:main.firstGradient
+                font.pointSize:main.generalTextSize
+                font.family:main.preferredFont
             }
         }
 
@@ -64,8 +74,8 @@ Component{
         states:[
             State { when:(lv.currentIndex === index)
                 PropertyChanges {   target:root; color:main.firstGradient }
-                PropertyChanges {   target:sessName; color:main.finalGradient  }
-                PropertyChanges {   target:sessDesc;  color:main.secondGradient  }
+                PropertyChanges {   target:sessName; color:main.textColour  }
+                PropertyChanges {   target:sessDesc;  color:main.textColour  }
             },
             State { when:(lv.currentIndex !== index)
                 PropertyChanges {   target:root; color:main.backGroundTranspColour}
@@ -76,7 +86,7 @@ Component{
         Keys.onPressed:(event)=> {
                            if (event.key === Qt.Key_Space||event.key === Qt.Key_Return)
                            {
-                           lv.currentIndex=model.index;sessionIndex=model.index;  event.accepted = true;
+                               lv.currentIndex=model.index;sessionIndex=model.index;  event.accepted = true;
                            }
                        }
     }
