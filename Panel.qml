@@ -32,7 +32,7 @@ FocusScope{
     property color panelNavColour:"#ffffffff"
     property string panelHeaderText:"Default header"
     property int panelHeaderPointsize:24
-    property string panelFont:"Tahoma"
+    property string panelFont:main.preferredFont
     property var modelItem
     property Component modelDelegate
     property int listViewOrientation
@@ -58,6 +58,9 @@ FocusScope{
                 height:panel.height*0.5
                 y:panel.height*0.25
                 buttonColour:panelNavColour
+                navBright:main.buttonMaxOpacity
+                navDim:main.buttonMinOpacity
+                aniSpeed:main.buttonAffectSpeed
                 activeFocusOnTab:showList
                 KeyNavigation.tab:panelLoader
                 KeyNavigation.backtab:navRight
@@ -120,6 +123,9 @@ FocusScope{
                 height:panel.height*0.5
                 y:panel.height*0.25
                 buttonColour:panelNavColour
+                navBright:main.buttonMaxOpacity
+                navDim:main.buttonMinOpacity
+                aniSpeed:main.buttonAffectSpeed
                 activeFocusOnTab:showList
                 KeyNavigation.tab:navLeft
                 KeyNavigation.backtab:panelLoader
