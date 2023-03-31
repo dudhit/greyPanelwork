@@ -33,6 +33,7 @@ FocusScope{
     property color buttonCol:"#ff404040"
     property real highOpacity:0.6
     property real lowOpacity:0.4
+    property int fadeSpeed: 30
     property bool show:true
     /*text settings*/
     property string label:"your text here"
@@ -49,6 +50,7 @@ FocusScope{
         buttonColour: buttonCol
         navBright: highOpacity
         navDim:lowOpacity
+        aniSpeed:fadeSpeed
         onSelectNav: {action()}
         Text{
          id:customtext
