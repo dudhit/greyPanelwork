@@ -40,9 +40,10 @@ Component{
             Text{
                 id:fullName
                 Layout.fillWidth:true
-                color:secondGradient
+                color:main.textColour
                 wrapMode:Text.WordWrap
-                minimumPointSize:70
+                minimumPointSize:main.generalTextSize
+                font.family:main.preferredFont
                 minimumPixelSize:56
                 text:model.realName
             }
@@ -59,7 +60,9 @@ Component{
                 Layout.fillWidth:false
                 Layout.fillHeight:true
                 Layout.alignment:Qt.AlignVCenter
-                color:secondGradient
+                color:main.backGroundTranspColour
+                font.pointSize:1
+                font.family:main.preferredFont
                 text:model.name
                 wrapMode:Text.WordWrap
             }
@@ -67,7 +70,7 @@ Component{
             Rectangle {
                 id:textHolder
 //                Layout.fillHeight:true
-                color:firstGradient
+                color:main.firstGradient
                 Layout.maximumWidth:0
                 Layout.minimumHeight:50
                 Layout.maximumHeight:108
@@ -77,7 +80,10 @@ Component{
                     cursorVisible:true
                     anchors.fill:textHolder
                     anchors.margins:10
-                    color:finalGradient
+                color:main.backGroundTranspColour
+                font.pointSize:1
+            //    font.pointSize:main.generalTextSize
+          //      font.family:main.preferredFont
                     focus:true
                     text: ""
                     echoMode:TextInput.Password
@@ -110,17 +116,17 @@ Component{
             MouseArea{
                 anchors.fill:root
                 enabled:true;
-                onClicked:{lv.currentIndex=model.index;tempUser=model.name;
+                onClicked:{lv.currentIndex=model.index;/*tempUser=model.name;*/
                 }
 
             }
 
             states:[
                 State { when:(lv.currentIndex === index)
-                    PropertyChanges {   target:main; tempUser:model.name  }
-                    PropertyChanges {   target:textHolder; Layout.fillWidth:true;Layout.maximumWidth:root.width; color:firstGradient  }
-                    PropertyChanges {   target:userName; font.pointSize:17;Layout.fillWidth:true ; color:secondGradient  }
-                    PropertyChanges {   target:passwordFeild; focus:true ; font.pointSize:17; color:finalGradient; }
+                 //   PropertyChanges {   target:main; tempUser:model.name  }
+                    PropertyChanges {   target:textHolder; Layout.fillWidth:true;Layout.maximumWidth:root.width; color:main.firstGradient  }
+                    PropertyChanges {   target:userName; font.pointSize:main.generalTextSize;Layout.fillWidth:true ; color:secondGradient  }
+                    PropertyChanges {   target:passwordFeild; focus:true ; font.pointSize:main.generalTextSize; color:finalGradient; }
                 },
                 State { when:(lv.currentIndex !== index)
                     PropertyChanges {   target:textHolder;Layout.fillWidth:false;Layout.maximumWidth:0 ; color:backGroundTranspColour }
